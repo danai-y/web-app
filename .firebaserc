@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "web-app-7ef92": {
+      "hosting": {
+        "web-app": [
+          "web-app-7ef92"
+        ]
+      }
+    }
+  }
+}
