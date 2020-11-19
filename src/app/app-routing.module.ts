@@ -13,7 +13,7 @@ const routes: Routes = [
     component: ResNavComponent,
     children: [
       {
-        path: 'table-list',
+        path: '',
         component: TableListComponent
       },
       {
