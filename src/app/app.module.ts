@@ -17,6 +17,8 @@ import { MatListModule } from '@angular/material/list';
 import { CusNavComponent } from './cus-nav/cus-nav.component';
 import { TableListComponent } from './table-list/table-list.component';
 import { OrderListComponent } from './order-list/order-list.component';
+import { MenuComponent } from './menu/menu.component';
+import { OrderComponent } from './order/order.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +26,9 @@ import { OrderListComponent } from './order-list/order-list.component';
     ResNavComponent,
     CusNavComponent,
     TableListComponent,
-    OrderListComponent
+    OrderListComponent,
+    MenuComponent,
+    OrderComponent
   ],
   imports: [
     BrowserModule,
