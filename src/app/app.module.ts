@@ -14,11 +14,13 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
+import { CusNavComponent } from './cus-nav/cus-nav.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    ResNavComponent
+    ResNavComponent,
+    CusNavComponent
   ],
   imports: [
     BrowserModule,
