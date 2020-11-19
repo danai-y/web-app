@@ -15,12 +15,16 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { CusNavComponent } from './cus-nav/cus-nav.component';
+import { TableListComponent } from './table-list/table-list.component';
+import { OrderListComponent } from './order-list/order-list.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ResNavComponent,
-    CusNavComponent
+    CusNavComponent,
+    TableListComponent,
+    OrderListComponent
   ],
   imports: [
     BrowserModule,
