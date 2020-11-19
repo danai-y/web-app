@@ -1,1 +1,18 @@
-<p>menu works!</p>
+<div *ngFor="let dish of menu">
+    <mat-card>
+        <mat-card-title>
+            {{dish.name}}
+        </mat-card-title>
+        <mat-card-content>
+            <span>
+                price: {{dish.price}}
+            </span>
+            <span *ngIf="dish.status != 0; else elseBlock">
+                <button mat-raised-button color="primary">Order</button>
+            </span>
+            <ng-template #elseBlock>
+                <button mat-raised-button disabled>order</button>
+            </ng-template>
+        </mat-card-content>
+    </mat-card>
+</div>

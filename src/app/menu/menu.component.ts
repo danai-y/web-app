@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AngularFireDatabase } from '@angular/fire/database';
 
 @Component({
   selector: 'app-menu',
@@ -6,9 +7,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./menu.component.css']
 })
 export class MenuComponent implements OnInit {
-
-  constructor() { }
-
+  menu: any[] | undefined;
+  constructor(db: AngularFireDatabase) {
+    db.list('menu').valueChanges()
+    .subscribe(menu => {
+      this.menu = menu;
+    });
+  }
   ngOnInit(): void {
   }
 
