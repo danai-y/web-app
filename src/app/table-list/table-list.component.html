@@ -1,1 +1,18 @@
-<p>table-list works!</p>
+<div *ngFor="let table of tableList">
+    <mat-card>
+        <mat-card-title>
+            {{table.name}}
+        </mat-card-title>
+        <mat-card-content>
+            <span>
+                {{table.status}}
+            </span>
+            <span *ngIf="table.status != 'unavailable'; else elseBlock">
+                <button mat-raised-button color="primary">Visit</button>
+            </span>
+            <ng-template #elseBlock>
+                <button mat-raised-button disabled>Visit</button>
+            </ng-template>
+        </mat-card-content>
+    </mat-card>
+</div>

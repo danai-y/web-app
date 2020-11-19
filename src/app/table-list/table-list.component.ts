@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { AngularFireDatabase } from '@angular/fire/database';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-table-list',
@@ -6,9 +8,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./table-list.component.css']
 })
 export class TableListComponent implements OnInit {
-
-  constructor() { }
-
+  tableList: any[] | undefined;
+  constructor(db: AngularFireDatabase) {
+    db.list('tables').valueChanges()
+    .subscribe(tables => {
+      this.tableList = tables;
+    });
+  }
   ngOnInit(): void {
   }
 
