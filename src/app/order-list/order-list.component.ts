@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AngularFireDatabase } from '@angular/fire/database';
 
 @Component({
   selector: 'app-order-list',
@@ -7,7 +8,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class OrderListComponent implements OnInit {
 
-  constructor() { }
+  dbPath = "orders";
+  orderList: any[] | undefined;
+
+  constructor(db: AngularFireDatabase) {
+    db.list(this.dbPath).valueChanges()
+      .subscribe(orders => {
+        this.orderList = orders;
+        console.log(this.orderList);
+      });
+  }
 
   ngOnInit(): void {
   }

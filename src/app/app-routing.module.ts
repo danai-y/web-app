@@ -23,7 +23,7 @@ const routes: Routes = [
     ]
   },
   {
-    path: 'table',
+    path: 'table/:tableId',
     component: CusNavComponent,
     children: [
       {

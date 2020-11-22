@@ -8,7 +8,9 @@
                 {{table.status}}
             </span>
             <span *ngIf="table.status != 'unavailable'; else elseBlock">
-                <button mat-raised-button color="primary">Visit</button>
+                <button mat-raised-button color="primary" [routerLink]="['/table', table.id]">
+                    Visit
+                </button>
             </span>
             <ng-template #elseBlock>
                 <button mat-raised-button disabled>Visit</button>

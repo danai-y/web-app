@@ -1,1 +1,17 @@
-<p>order-list works!</p>
+<div *ngFor="let order of orderList">
+    <mat-card>
+        <mat-card-title>
+            dishId: {{order.dishId}}
+        </mat-card-title>
+        <mat-card-content>
+            <span>
+                tableId: {{order.tableId}}
+            </span>
+            <span *ngIf="order.served != 1">
+                <button mat-raised-button color="primary">
+                    Served
+                </button>
+            </span>
+        </mat-card-content>
+    </mat-card>
+</div>
