@@ -1,7 +1,6 @@
 <div *ngFor="let order of orders">
     <mat-card>
         <mat-card-title>
-<<<<<<< HEAD
             dishId: {{order.payload.val().name}}
         </mat-card-title>
         <mat-card-content>
@@ -10,19 +9,6 @@
             <button *ngIf="order.payload.val().status == 0" mat-raised-button color="warn" (click)="cancelOrder(order)">
                 Cancel
             </button>
-=======
-            dishId: {{order.dishId}}
-        </mat-card-title>
-        <mat-card-content>
-            <span>
-                tableId: {{order.tableId}}
-            </span>
-            <span *ngIf="order.served != 1">
-                <button mat-raised-button color="primary">
-                    Served
-                </button>
-            </span>
->>>>>>> ae38e9a344a48a8af7820db057b6c2252caf25a4
         </mat-card-content>
     </mat-card>
 </div>
