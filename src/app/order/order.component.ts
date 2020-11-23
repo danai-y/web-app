@@ -12,9 +12,13 @@ export class OrderComponent implements OnInit {
 
   tableId!: number;
   ordersPath = "orders";
+<<<<<<< HEAD
   orders!: any[];
   orderStatus = ["pending", "preparing", "served"];
   ordersRef!: AngularFireList<any>;
+=======
+  orders: any[] | undefined;
+>>>>>>> ae38e9a344a48a8af7820db057b6c2252caf25a4
 
   constructor(
     private route: ActivatedRoute,
@@ -24,12 +28,21 @@ export class OrderComponent implements OnInit {
     this.tableId = cusNavService.getTableId();
     console.log("tableId: " + this.tableId);
 
+<<<<<<< HEAD
     this.ordersRef = db.list(this.ordersPath);
     db.list(this.ordersPath, ref => ref.orderByChild('tableId').equalTo(this.tableId))
       .snapshotChanges().subscribe(orders => {
         this.orders = orders;
         console.log(this.orders);
       });
+=======
+    db.list(this.ordersPath, ref => ref.orderByChild('tableId').equalTo(this.tableId))
+    .valueChanges()
+    .subscribe(orders =>{
+      this.orders = orders;
+      console.log(this.orders);
+    });
+>>>>>>> ae38e9a344a48a8af7820db057b6c2252caf25a4
   }
 
   ngOnInit(): void {

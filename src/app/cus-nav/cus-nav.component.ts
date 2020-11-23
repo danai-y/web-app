@@ -12,8 +12,11 @@ import { ActivatedRoute } from '@angular/router';
   providers: [CusNavService],
 })
 export class CusNavComponent implements OnInit {
+<<<<<<< HEAD
 
   tableId!: number;
+=======
+>>>>>>> ae38e9a344a48a8af7820db057b6c2252caf25a4
 
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
     .pipe(
@@ -29,9 +32,14 @@ export class CusNavComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
+<<<<<<< HEAD
       this.tableId = Number(params.get('tableId'));
     });
     this.cusNavService.setTableId(this.tableId);
+=======
+      this.cusNavService.setTableId(Number(params.get('tableId')));
+    });
+>>>>>>> ae38e9a344a48a8af7820db057b6c2252caf25a4
   }
 
 }

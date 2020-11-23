@@ -9,6 +9,7 @@ import { AngularFireDatabase, AngularFireList } from '@angular/fire/database';
 export class TableListComponent implements OnInit {
 
   tablesPath = "tables";
+<<<<<<< HEAD
   tableList!: any[];
   tableStatus = ["unavailable", "available", "in-service", "billing"];
   tablesRef!: AngularFireList<any>;
@@ -23,6 +24,18 @@ export class TableListComponent implements OnInit {
       });
   }
 
+=======
+  tableList: any[] | undefined;
+
+  constructor(db: AngularFireDatabase) {
+    db.list(this.tablesPath).valueChanges()
+    .subscribe(tables => {
+      this.tableList = tables;
+      console.log(this.tableList);
+    });
+  }
+  
+>>>>>>> ae38e9a344a48a8af7820db057b6c2252caf25a4
   ngOnInit(): void {
   }
 

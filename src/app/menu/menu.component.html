@@ -8,7 +8,11 @@
                 price: {{dish.price}}
             </span>
             <span *ngIf="dish.status != 0; else elseBlock">
+<<<<<<< HEAD
                 <button mat-raised-button color="primary" (click)="addOrder(dish)">
+=======
+                <button mat-raised-button color="primary" (click)="addOrder(dish.id)">
+>>>>>>> ae38e9a344a48a8af7820db057b6c2252caf25a4
                     Order
                 </button>
             </span>

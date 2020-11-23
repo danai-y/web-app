@@ -7,6 +7,7 @@
             <span>
                 status: {{tableStatus[table.payload.val().status]}}
             </span>
+<<<<<<< HEAD
             <div>
                 <button mat-raised-button *ngIf="table.payload.val().status != 0"
                     [routerLink]="['/table', table.payload.val().id]">
@@ -25,6 +26,16 @@
                     Bill
                 </button>
             </div>
+=======
+            <span *ngIf="table.status != 'unavailable'; else elseBlock">
+                <button mat-raised-button color="primary" [routerLink]="['/table', table.id]">
+                    Visit
+                </button>
+            </span>
+            <ng-template #elseBlock>
+                <button mat-raised-button disabled>Visit</button>
+            </ng-template>
+>>>>>>> ae38e9a344a48a8af7820db057b6c2252caf25a4
         </mat-card-content>
     </mat-card>
 </div>
