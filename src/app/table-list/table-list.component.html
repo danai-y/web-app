@@ -1,18 +1,30 @@
 <div *ngFor="let table of tableList">
     <mat-card>
         <mat-card-title>
-            {{table.name}}
+            {{table.payload.val().name}}
         </mat-card-title>
         <mat-card-content>
             <span>
-                {{table.status}}
+                status: {{tableStatus[table.payload.val().status]}}
             </span>
-            <span *ngIf="table.status != 'unavailable'; else elseBlock">
-                <button mat-raised-button color="primary">Visit</button>
-            </span>
-            <ng-template #elseBlock>
-                <button mat-raised-button disabled>Visit</button>
-            </ng-template>
+            <div>
+                <button mat-raised-button *ngIf="table.payload.val().status != 0"
+                    [routerLink]="['/table', table.payload.val().id]">
+                    Site
+                </button>
+                <button mat-raised-button *ngIf="table.payload.val().status == 0" color="primary"
+                    (click)="enableTable(table)">
+                    Enable
+                </button>
+                <button mat-raised-button *ngIf="table.payload.val().status == 1" color="warn"
+                    (click)="disableTable(table)">
+                    Disable
+                </button>
+                <button mat-raised-button *ngIf="table.payload.val().status == 3" color="accent"
+                    (click)="billTable(table)">
+                    Bill
+                </button>
+            </div>
         </mat-card-content>
     </mat-card>
 </div>
