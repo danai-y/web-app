@@ -21,6 +21,7 @@ import { OrderListComponent } from './order-list/order-list.component';
 import { MenuComponent } from './menu/menu.component';
 import { OrderComponent } from './order/order.component';
 import { MatCardModule } from '@angular/material/card';
+import { MenuListComponent } from './menu-list/menu-list.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { MatCardModule } from '@angular/material/card';
     TableListComponent,
     OrderListComponent,
     MenuComponent,
-    OrderComponent
+    OrderComponent,
+    MenuListComponent
   ],
   imports: [
     BrowserModule,

@@ -13,6 +13,8 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class CusNavComponent implements OnInit {
 
+  tableId!: number;
+
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
     .pipe(
       map(result => result.matches),
@@ -27,8 +29,9 @@ export class CusNavComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
-      this.cusNavService.setTableId(Number(params.get('tableId')));
+      this.tableId = +params.get('tableId')!;
     });
+    this.cusNavService.setTableId(this.tableId);
   }
 
 }

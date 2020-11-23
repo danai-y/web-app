@@ -11,7 +11,7 @@ import { CusNavService } from '../services/cus-nav.service';
 export class MenuComponent implements OnInit {
 
   ordersRef!: AngularFireList<any>;
-  menu: any[] | undefined;
+  menu!: any[];
   tableId!: number;
   menuPath = "menu";
   ordersPath = "orders";

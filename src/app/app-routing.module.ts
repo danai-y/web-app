@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { CusNavComponent } from './cus-nav/cus-nav.component';
+import { MenuListComponent } from './menu-list/menu-list.component';
 import { MenuComponent } from './menu/menu.component';
 import { OrderListComponent } from './order-list/order-list.component';
 import { OrderComponent } from './order/order.component';
@@ -9,7 +10,7 @@ import { TableListComponent } from './table-list/table-list.component';
 
 const routes: Routes = [
   {
-    path: 'manage',
+    path: '',
     component: ResNavComponent,
     children: [
       {
@@ -19,6 +20,10 @@ const routes: Routes = [
       {
         path: 'order-list',
         component: OrderListComponent
+      },
+      {
+        path: 'menu-list',
+        component: MenuListComponent
       }
     ]
   },
@@ -36,6 +41,7 @@ const routes: Routes = [
       }
     ]
   },
+  { path: '**', redirectTo: '' }
 ];
 
 @NgModule({
