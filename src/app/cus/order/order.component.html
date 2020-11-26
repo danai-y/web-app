@@ -1,7 +1,7 @@
 <div *ngFor="let order of orders">
     <mat-card>
         <mat-card-title>
-            dishId: {{order.payload.val().name}}
+            {{order.payload.val().dishName}}
         </mat-card-title>
         <mat-card-content>
             <div>price: {{order.payload.val().price}}</div>

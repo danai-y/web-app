@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { CusNavService } from '../services/cus-nav.service';
+import { CusNavService } from '../cus-nav.service';
 import { AngularFireDatabase, AngularFireList } from '@angular/fire/database';
 
 @Component({
