@@ -26,6 +26,12 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
 import { LoginComponent } from './login/login.component';
 import { EditTableComponent } from './admin/edit-table/edit-table.component';
 import { EditMenuComponent } from './admin/edit-menu/edit-menu.component';
+import { AdminNavComponent } from './admin/admin-nav/admin-nav.component';
+import { TableFormComponent } from './admin/table-form/table-form.component';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { FormsModule } from '@angular/forms';
+import { MenuFormComponent } from './admin/menu-form/menu-form.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +45,10 @@ import { EditMenuComponent } from './admin/edit-menu/edit-menu.component';
     MenuListComponent,
     LoginComponent,
     EditTableComponent,
-    EditMenuComponent
+    EditMenuComponent,
+    AdminNavComponent,
+    TableFormComponent,
+    MenuFormComponent
   ],
   imports: [
     BrowserModule,
@@ -55,6 +64,9 @@ import { EditMenuComponent } from './admin/edit-menu/edit-menu.component';
     MatListModule,
     MatCardModule,
     AngularFireAuthModule,
+    MatFormFieldModule,
+    MatInputModule,
+    FormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

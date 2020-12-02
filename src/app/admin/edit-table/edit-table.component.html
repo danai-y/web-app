@@ -1,1 +1,19 @@
-<p>edit-table works!</p>
+<button class="add-button" mat-raised-button color="accent" (click)="addTable()" routerLink="table-form">
+    Add table
+</button>
+<button mat-raised-button color="warn" (click)="deleteTable()">
+    Delete a table
+</button>
+
+<div *ngFor="let table of tableList">
+    <mat-card>
+        {{table.payload.val().name}}
+        <button *ngIf="table.payload.val().status == 0" mat-raised-button color="primary"
+            (click)="editKeyTable(table.key, table.payload.val())" routerLink="table-form">
+            Edit
+        </button>
+        <button *ngIf="table.payload.val().status == 1" mat-raised-button color="warn" (click)="disableTable(table)">
+            Disable
+        </button>
+    </mat-card>
+</div>

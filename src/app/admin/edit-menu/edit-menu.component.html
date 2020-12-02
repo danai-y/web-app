@@ -1,1 +1,19 @@
-<p>edit-menu works!</p>
+<button class="add-button" mat-raised-button color="accent" (click)="addDish()" routerLink="/admin/menu-form">
+    Add dish
+</button>
+
+<div *ngFor="let dish of menu">
+    <mat-card>
+        {{dish.payload.val().name}}
+        <button *ngIf="dish.payload.val().status == 0" mat-raised-button color="primary"
+            (click)="editKeyDish(dish.key, dish.payload.val())" routerLink="/admin/menu-form">
+            Edit
+        </button>
+        <button *ngIf="dish.payload.val().status == 0" mat-raised-button color="warn" (click)="deleteDish(dish.key)">
+            Delete
+        </button>
+        <button *ngIf="dish.payload.val().status == 1" mat-raised-button color="warn" (click)="disableDish(dish)">
+            Disable
+        </button>
+    </mat-card>
+</div>

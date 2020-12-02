@@ -11,6 +11,9 @@ import { TableListComponent } from './res/table-list/table-list.component';
 import { AngularFireAuthGuard, hasCustomClaim, redirectUnauthorizedTo, redirectLoggedInTo } from '@angular/fire/auth-guard';
 import { EditTableComponent } from './admin/edit-table/edit-table.component';
 import { EditMenuComponent } from './admin/edit-menu/edit-menu.component';
+import { AdminNavComponent } from './admin/admin-nav/admin-nav.component';
+import { TableFormComponent } from './admin/table-form/table-form.component';
+import { MenuFormComponent } from './admin/menu-form/menu-form.component';
 
 const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['login']);
 
@@ -19,12 +22,14 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   {
     path: 'admin',
-    component: ResNavComponent,
+    component: AdminNavComponent,
     canActivate: [AngularFireAuthGuard],
     data: { authGuardPipe: redirectUnauthorizedToLogin },
     children: [
-      { path: 'edit-table', component: EditTableComponent },
-      { path: 'edit-menu', component: EditMenuComponent }
+      { path: '', component: EditTableComponent },
+      { path: 'edit-menu', component: EditMenuComponent },
+      { path: 'table-form', component: TableFormComponent },
+      { path: 'menu-form', component: MenuFormComponent },
     ]
   },
   {
