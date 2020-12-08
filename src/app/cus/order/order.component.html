@@ -1,7 +1,7 @@
 <div *ngFor="let order of orders">
     <mat-card>
         <mat-card-title>
-            {{order.payload.val().dishName}}
+            {{order.payload.val().dish}}
         </mat-card-title>
         <mat-card-content>
             <div>price: {{order.payload.val().price}}</div>
@@ -12,3 +12,7 @@
         </mat-card-content>
     </mat-card>
 </div>
+
+<button mat-raised-button color="accent" (click)="billTable()">
+    Call for billing
+</button>

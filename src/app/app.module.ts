@@ -32,6 +32,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { FormsModule } from '@angular/forms';
 import { MenuFormComponent } from './admin/menu-form/menu-form.component';
+import { BillingComponent } from './res/billing/billing.component';
 
 @NgModule({
   declarations: [
@@ -48,7 +49,8 @@ import { MenuFormComponent } from './admin/menu-form/menu-form.component';
     EditMenuComponent,
     AdminNavComponent,
     TableFormComponent,
-    MenuFormComponent
+    MenuFormComponent,
+    BillingComponent
   ],
   imports: [
     BrowserModule,

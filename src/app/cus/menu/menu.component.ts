@@ -12,7 +12,7 @@ export class MenuComponent implements OnInit {
 
   ordersRef!: AngularFireList<any>;
   menu!: any[];
-  tableId!: number;
+  tableName!: string;
   menuPath = "menu";
   ordersPath = "orders";
 
@@ -32,9 +32,9 @@ export class MenuComponent implements OnInit {
   }
 
   addOrder(dish: any) {
-    this.tableId = this.cusNavService.getTableId();
-    this.ordersRef.push({'dishName': dish.name, 'tableId': Number(this.tableId), 'price': dish.price, 'status': 0});
-    console.log("table: " + this.tableId + " ORDER dish: " + dish.name);
+    this.tableName = this.cusNavService.getTableName();
+    this.ordersRef.push({'dish': dish.name, 'table': this.tableName, 'price': Number(dish.price), 'status': 0});
+    console.log("table: " + this.tableName + " ORDER dish: " + dish.name);
   }
 
 }

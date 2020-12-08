@@ -1,17 +1,23 @@
 <div *ngFor="let order of orderList">
     <mat-card>
         <mat-card-title>
-            {{order.payload.val().dishName}}
+            {{order.payload.val().dish}} | {{order.payload.val().table}}
         </mat-card-title>
         <mat-card-content>
             <span>
-                tableId: {{order.payload.val().tableId}}
+                {{orderStatus[order.payload.val().status]}}
             </span>
-            <span *ngIf="order.payload.val().status == 0">
-                <button mat-raised-button color="primary" (click)="serveOrder(order)">
-                    Served
-                </button>
-            </span>
+            <button *ngIf="order.payload.val().status == 0" mat-raised-button color="primary"
+                (click)="prepareOder(order)">
+                Preparing
+            </button>
+            <button *ngIf="order.payload.val().status == 1" mat-raised-button color="primary"
+                (click)="serveOrder(order)">
+                Served
+            </button>
+            <button mat-raised-button color="warn" (click)="cancelOrder(order)">
+                Cancel
+            </button>
         </mat-card-content>
     </mat-card>
 </div>

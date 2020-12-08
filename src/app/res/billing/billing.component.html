@@ -1,0 +1,34 @@
+<div *ngFor="let order of orders">
+    <mat-card>
+        <mat-card-title>
+            {{order.payload.val().dish}}
+        </mat-card-title>
+        <mat-card-content>
+            <div>price: {{order.payload.val().price}}</div>
+            <div>status: {{orderStatus[order.payload.val().status]}}</div>
+            <button *ngIf="order.payload.val().status != 2" mat-raised-button color="primary"
+                (click)="serveOrder(order)">
+                Served
+            </button>
+            <button mat-raised-button color="warn">
+                Cancel
+            </button>
+        </mat-card-content>
+    </mat-card>
+</div>
+
+<span *ngIf="totalPrice > 0">
+    Total: {{ totalPrice }}
+</span>
+<span *ngIf="totalPrice < 0">
+    Unable to get total!
+</span>
+<button *ngIf="totalPrice == 0" mat-raised-button color="primary" (click)="getTotal()">
+    Get total
+</button>
+<button *ngIf="totalPrice > 0" mat-raised-button color="primary" (click)="bill()" routerLink="/manage">
+    Paid
+</button>
+<button mat-raised-button color="warn" (click)="cancelBilling()" routerLink="/manage">
+    Cancel billing
+</button>

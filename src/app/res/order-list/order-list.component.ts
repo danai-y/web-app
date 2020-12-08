@@ -12,6 +12,7 @@ export class OrderListComponent implements OnInit {
   orderList: any[] | undefined;
   keys: any[] | undefined;
   ordersRef!: AngularFireList<any>;
+  orderStatus = ["pending", "preparing", "served"];
 
   constructor(db: AngularFireDatabase) {
 
@@ -26,9 +27,16 @@ export class OrderListComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  serveOrder(order: any) {
+  prepareOder(order: any) {
     this.ordersRef.update(order.key, { 'status': 1 });
-    console.log(order.key);
+  }
+
+  serveOrder(order: any) {
+    this.ordersRef.update(order.key, { 'status': 2 });
+  }
+
+  cancelOrder(order: any) {
+    this.ordersRef.remove(order.key);
   }
 
 }

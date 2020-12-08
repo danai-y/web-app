@@ -21,7 +21,7 @@
                     Disable
                 </button>
                 <button mat-raised-button *ngIf="table.payload.val().status == 3" color="accent"
-                    (click)="billTable(table)">
+                    (click)="billTable(table)" routerLink="/manage/billing">
                     Bill
                 </button>
             </div>

@@ -14,6 +14,7 @@ import { EditMenuComponent } from './admin/edit-menu/edit-menu.component';
 import { AdminNavComponent } from './admin/admin-nav/admin-nav.component';
 import { TableFormComponent } from './admin/table-form/table-form.component';
 import { MenuFormComponent } from './admin/menu-form/menu-form.component';
+import { BillingComponent } from './res/billing/billing.component';
 
 const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['login']);
 
@@ -38,7 +39,8 @@ const routes: Routes = [
     children: [
       { path: '', component: TableListComponent },
       { path: 'order-list', component: OrderListComponent },
-      { path: 'menu-list', component: MenuListComponent }
+      { path: 'menu-list', component: MenuListComponent },
+      { path: 'billing', component: BillingComponent },
     ]
   },
   {

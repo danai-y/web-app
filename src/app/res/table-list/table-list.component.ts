@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFireDatabase, AngularFireList } from '@angular/fire/database';
+import { BillingService } from '../billing.service';
 
 @Component({
   selector: 'app-table-list',
@@ -13,7 +14,7 @@ export class TableListComponent implements OnInit {
   tableStatus = ["unavailable", "available", "in-service", "billing"];
   tablesRef!: AngularFireList<any>;
 
-  constructor(db: AngularFireDatabase) {
+  constructor(db: AngularFireDatabase,public billingService: BillingService) {
 
     this.tablesRef = db.list(this.tablesPath);
     db.list(this.tablesPath).snapshotChanges()
@@ -35,7 +36,7 @@ export class TableListComponent implements OnInit {
   }
 
   billTable(table: any) {
-    
+    this.billingService.setTableName(table.payload.val().name);
   }
 
 }

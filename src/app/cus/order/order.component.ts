@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
 import { CusNavService } from '../cus-nav.service';
 import { AngularFireDatabase, AngularFireList } from '@angular/fire/database';
 
@@ -10,22 +9,18 @@ import { AngularFireDatabase, AngularFireList } from '@angular/fire/database';
 })
 export class OrderComponent implements OnInit {
 
-  tableId!: number;
+  tableName!: string;
   ordersPath = "orders";
   orders!: any[];
   orderStatus = ["pending", "preparing", "served"];
   ordersRef!: AngularFireList<any>;
 
-  constructor(
-    private route: ActivatedRoute,
-    private cusNavService: CusNavService,
-    private db: AngularFireDatabase,
-  ) {
-    this.tableId = cusNavService.getTableId();
-    console.log("tableId: " + this.tableId);
+  constructor(private cusNavService: CusNavService, private db: AngularFireDatabase) {
+    this.tableName = cusNavService.getTableName();
+    console.log("tableId: " + this.tableName);
 
     this.ordersRef = db.list(this.ordersPath);
-    db.list(this.ordersPath, ref => ref.orderByChild('tableId').equalTo(this.tableId))
+    db.list(this.ordersPath, ref => ref.orderByChild('table').equalTo(this.tableName))
       .snapshotChanges().subscribe(orders => {
         this.orders = orders;
         console.log(this.orders);
@@ -37,6 +32,10 @@ export class OrderComponent implements OnInit {
 
   cancelOrder(order: any) {
     this.ordersRef.remove(order.key);
+  }
+
+  billTable() {
+    this.cusNavService.billTable();
   }
 
 }
