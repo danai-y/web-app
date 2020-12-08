@@ -1,18 +1,15 @@
 <div *ngFor="let dish of menu">
     <mat-card>
-        <mat-card-title>
+        <span class="dish-name">
             {{dish.payload.val().name}}
-        </mat-card-title>
-        <mat-card-content>
-            price: {{dish.payload.val().price}}
-            <button mat-raised-button *ngIf="dish.payload.val().status == 0" color="primary"
-                (click)="enableDish(dish)">
+        </span>
+        <div>
+            <button mat-raised-button *ngIf="dish.payload.val().status == 0" color="primary" (click)="enableDish(dish)">
                 Enable
             </button>
-            <button mat-raised-button *ngIf="dish.payload.val().status == 1" color="warn"
-                (click)="disableDish(dish)">
+            <button mat-raised-button *ngIf="dish.payload.val().status == 1" color="warn" (click)="disableDish(dish)">
                 Disable
             </button>
-        </mat-card-content>
+        </div>
     </mat-card>
 </div>

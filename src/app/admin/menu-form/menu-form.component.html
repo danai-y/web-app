@@ -1,12 +1,14 @@
-<div>
-    <mat-form-field appearance="outline">
-        <mat-label>Dish Name</mat-label>
-        <input [(ngModel)]="dishName" matInput placeholder="Placeholder">
-    </mat-form-field>
-    <mat-form-field appearance="outline">
-        <mat-label>Price</mat-label>
-        <input [(ngModel)]="price" matInput placeholder="Placeholder">
-    </mat-form-field>
+<div class="form-container">
+    <div>
+        <mat-form-field appearance="outline">
+            <mat-label>Dish Name</mat-label>
+            <input [(ngModel)]="dishName" matInput placeholder="Placeholder">
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label>Price</mat-label>
+            <input [(ngModel)]="price" matInput placeholder="Placeholder">
+        </mat-form-field>
+    </div>
     <div>
         <button mat-raised-button type="submit" (click)="saveDish()" routerLink="/admin/edit-menu">
             Save

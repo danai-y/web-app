@@ -9,25 +9,22 @@ import { AngularFireDatabase, AngularFireList } from '@angular/fire/database';
 export class OrderListComponent implements OnInit {
 
   ordersPath = "orders";
-  orderList: any[] | undefined;
-  keys: any[] | undefined;
   ordersRef!: AngularFireList<any>;
+  orderList!: any[];
   orderStatus = ["pending", "preparing", "served"];
 
   constructor(db: AngularFireDatabase) {
-
     this.ordersRef = db.list(this.ordersPath);
     db.list(this.ordersPath).snapshotChanges()
       .subscribe(orders => {
         this.orderList = orders;
-        console.log(this.orderList);
       });
   }
 
   ngOnInit(): void {
   }
 
-  prepareOder(order: any) {
+  prepareOrder(order: any) {
     this.ordersRef.update(order.key, { 'status': 1 });
   }
 

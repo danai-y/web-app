@@ -30,9 +30,14 @@ import { AdminNavComponent } from './admin/admin-nav/admin-nav.component';
 import { TableFormComponent } from './admin/table-form/table-form.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MenuFormComponent } from './admin/menu-form/menu-form.component';
 import { BillingComponent } from './res/billing/billing.component';
+import { ReportComponent } from './res/report/report.component';
+import { MatSelectModule } from '@angular/material/select';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatTableModule } from '@angular/material/table';
 
 @NgModule({
   declarations: [
@@ -50,7 +55,8 @@ import { BillingComponent } from './res/billing/billing.component';
     AdminNavComponent,
     TableFormComponent,
     MenuFormComponent,
-    BillingComponent
+    BillingComponent,
+    ReportComponent
   ],
   imports: [
     BrowserModule,
@@ -69,6 +75,11 @@ import { BillingComponent } from './res/billing/billing.component';
     MatFormFieldModule,
     MatInputModule,
     FormsModule,
+    ReactiveFormsModule,
+    MatSelectModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatTableModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

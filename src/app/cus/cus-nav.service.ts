@@ -5,7 +5,7 @@ import { AngularFireDatabase, AngularFireList } from '@angular/fire/database';
 
 export class CusNavService {
 
-  tableId!: number;
+  public tableId!: number;
   private table!: any;
   private tablesPath = "tables";
   private tablesRef!: AngularFireList<any>;

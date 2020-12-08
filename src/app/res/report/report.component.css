@@ -1,0 +1,17 @@
+.form-container {
+    padding: 16px 0px 0px 16px;
+}
+
+.report-container {
+    padding: 16px 8px 0px 8px;
+}
+
+.mat-header-cell {
+    font-size: 16px;
+    color: black;
+}
+
+.total {
+    font-size: 20px;
+    padding-left: 8px;
+}

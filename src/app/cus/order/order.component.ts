@@ -9,21 +9,18 @@ import { AngularFireDatabase, AngularFireList } from '@angular/fire/database';
 })
 export class OrderComponent implements OnInit {
 
-  tableName!: string;
   ordersPath = "orders";
   orders!: any[];
+  noOrders: number = 0;
   orderStatus = ["pending", "preparing", "served"];
   ordersRef!: AngularFireList<any>;
 
   constructor(private cusNavService: CusNavService, private db: AngularFireDatabase) {
-    this.tableName = cusNavService.getTableName();
-    console.log("tableId: " + this.tableName);
-
     this.ordersRef = db.list(this.ordersPath);
-    db.list(this.ordersPath, ref => ref.orderByChild('table').equalTo(this.tableName))
+    db.list(this.ordersPath, ref => ref.orderByChild('table').equalTo(cusNavService.getTableName()))
       .snapshotChanges().subscribe(orders => {
         this.orders = orders;
-        console.log(this.orders);
+        this.noOrders = orders.length;
       });
   }
 

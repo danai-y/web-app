@@ -15,6 +15,7 @@ import { AdminNavComponent } from './admin/admin-nav/admin-nav.component';
 import { TableFormComponent } from './admin/table-form/table-form.component';
 import { MenuFormComponent } from './admin/menu-form/menu-form.component';
 import { BillingComponent } from './res/billing/billing.component';
+import { ReportComponent } from './res/report/report.component';
 
 const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['login']);
 
@@ -41,6 +42,7 @@ const routes: Routes = [
       { path: 'order-list', component: OrderListComponent },
       { path: 'menu-list', component: MenuListComponent },
       { path: 'billing', component: BillingComponent },
+      { path: 'report', component: ReportComponent },
     ]
   },
   {

@@ -9,18 +9,17 @@ import { BillingService } from '../billing.service';
 })
 export class TableListComponent implements OnInit {
 
-  tablesPath = "tables";
   tableList!: any[];
   tableStatus = ["unavailable", "available", "in-service", "billing"];
+  tablesPath = "tables";
   tablesRef!: AngularFireList<any>;
 
-  constructor(db: AngularFireDatabase,public billingService: BillingService) {
+  constructor(db: AngularFireDatabase, public billingService: BillingService) {
 
     this.tablesRef = db.list(this.tablesPath);
     db.list(this.tablesPath).snapshotChanges()
       .subscribe(tables => {
         this.tableList = tables;
-        console.log(this.tableList);
       });
   }
 

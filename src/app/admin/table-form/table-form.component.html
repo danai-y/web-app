@@ -1,9 +1,16 @@
-<div>
-    <mat-form-field appearance="outline">
-        <mat-label>Table Name</mat-label>
-        <input [(ngModel)]="tableName" matInput placeholder="Placeholder">
-    </mat-form-field>
-    <button mat-raised-button type="submit" (click)="saveTable()" routerLink="/admin">
-        Save
-    </button>
+<div class="form-container">
+    <div>
+        <mat-form-field appearance="outline">
+            <mat-label>Table Name</mat-label>
+            <input [(ngModel)]="tableName" matInput placeholder="Placeholder">
+        </mat-form-field>
+    </div>
+    <div>
+        <button mat-raised-button type="submit" (click)="saveTable()" routerLink="/admin">
+            Save
+        </button>
+        <button mat-raised-button type="submit" routerLink="/admin">
+            Cancel
+        </button>
+    </div>
 </div>

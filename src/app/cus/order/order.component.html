@@ -13,6 +13,6 @@
     </mat-card>
 </div>
 
-<button mat-raised-button color="accent" (click)="billTable()">
+<button *ngIf="noOrders > 0" mat-raised-button color="accent" (click)="billTable()">
     Call for billing
 </button>
