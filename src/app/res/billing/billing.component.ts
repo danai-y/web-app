@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { BillingService } from '../billing.service';
 import { AngularFireDatabase, AngularFireList } from '@angular/fire/database';
+import { Observable, of } from 'rxjs';
 
 @Component({
   selector: 'app-billing',
@@ -11,7 +12,9 @@ export class BillingComponent implements OnInit {
 
   orders!: any[];
   orderStatus = ["pending", "preparing", "served"];
-  totalPrice: number = 0;
+  allServed: boolean = false;
+  totalPrice$!: Observable<number>;
+  addPrice!: number;
 
   ordersPath = "orders";
   ordersRef!: AngularFireList<any>;
@@ -28,6 +31,13 @@ export class BillingComponent implements OnInit {
     db.list(this.ordersPath, ref => ref.orderByChild('table').equalTo(billingService.tableName))
       .snapshotChanges().subscribe(orders => {
         this.orders = orders;
+        let totalPrice = 0;
+        this.orders.forEach(order => {
+          totalPrice = totalPrice + order.payload.val().price;
+        });
+        this.totalPrice$ = of(totalPrice);
+        const served = (element: any) => element.payload.val().status == 2;
+        this.allServed = this.orders.every(served)
       });
   }
 
@@ -35,15 +45,8 @@ export class BillingComponent implements OnInit {
   }
 
   getTotal() {
-    const served = (element: any) => element.payload.val().status == 2;
-    if (!this.orders.every(served)) {
-      this.totalPrice = -1;
-      return;
-    }
-    this.totalPrice = 0;
-    this.orders.forEach(order => {
-      this.totalPrice = this.totalPrice + order.payload.val().price;
-    });
+
+
   }
 
   serveOrder(order: any) {
@@ -55,27 +58,29 @@ export class BillingComponent implements OnInit {
   }
 
   bill() {
+    if (!this.addPrice) {
+      this.addPrice = 0;
+    }
+    let totalPrice;
+    this.totalPrice$.subscribe(t => { totalPrice = t });
     const [date, time] = this.getDateTime();
     const key = this.transRef.push({
       'date': date,
       'time': time,
       'table': this.billingService.tableName,
-      'total': this.totalPrice
+      'total': Number(totalPrice) + Number(this.addPrice)
     }).key;
     this.moveOrdersToInactive(key);
     this.billingService.billedTable();
   }
 
   moveOrdersToInactive(key: any) {
-    let dish: string;
-    let price: number;
     this.orders.forEach(order => {
-      dish = order.payload.val().dish;
-      price = order.payload.val().price;
       this.inactiveRaf.push({
         'trans-key': key,
-        'dish': dish,
-        'price': price
+        'dish': order.payload.val().dish,
+        'price': order.payload.val().price,
+        'note': order.payload.val().note
       })
       this.ordersRef.remove(order.key);
     });
@@ -91,6 +96,10 @@ export class BillingComponent implements OnInit {
     let mn = ("0" + now.getMinutes()).slice(-2);
     const time = hh + ":" + mn;
     return [date, time];
+  }
+
+  cancelOrder(order: any) {
+    this.ordersRef.remove(order.key);
   }
 
 }

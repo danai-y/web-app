@@ -21,6 +21,9 @@ export class OrderComponent implements OnInit {
       .snapshotChanges().subscribe(orders => {
         this.orders = orders;
         this.noOrders = orders.length;
+        if (this.noOrders == 0) {
+          cusNavService.setTableFree();
+        }
       });
   }
 

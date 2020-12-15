@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFireDatabase, AngularFireList } from '@angular/fire/database';
-import { TableFormService } from '../table-form.service';
 
 @Component({
   selector: 'app-edit-table',
@@ -13,7 +12,7 @@ export class EditTableComponent implements OnInit {
   tableList!: any[];
   tablesRef!: AngularFireList<any>;
 
-  constructor(db: AngularFireDatabase, public tableFormService: TableFormService) { 
+  constructor(db: AngularFireDatabase) { 
     this.tablesRef = db.list(this.tablesPath);
     db.list(this.tablesPath).snapshotChanges()
       .subscribe(tables => {
@@ -25,16 +24,8 @@ export class EditTableComponent implements OnInit {
   }
 
   addTable() {
-    this.tableFormService.setKey('0');
-  }
-
-  disableTable(table: any) {
-    this.tablesRef.update(table.key, { 'status': 0 })
-  }
-
-  editKeyTable(key: any, table: any) {
-    this.tableFormService.setKey(key);
-    this.tableFormService.setTable(table);
+    var id = this.tableList.length + 1;
+    this.tablesRef.push({'id': id, 'status': 0});
   }
 
   deleteTable() {

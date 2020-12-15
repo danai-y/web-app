@@ -7,14 +7,9 @@
             <span>
                 price: {{dish.price}}
             </span>
-            <span *ngIf="dish.status != 0; else elseBlock">
-                <button mat-raised-button color="primary" (click)="addOrder(dish)">
-                    Order
-                </button>
-            </span>
-            <ng-template #elseBlock>
-                <button mat-raised-button disabled>order</button>
-            </ng-template>
+            <button *ngIf="dish.status != 0" mat-raised-button color="primary" (click)="openDialog(dish)">
+                Order
+            </button>
         </mat-card-content>
     </mat-card>
 </div>

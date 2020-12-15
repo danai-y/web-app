@@ -1,3 +1,7 @@
 .mat-card {
     padding: 8px 8px 8px 8px;
 }
+
+.mat-raised-button {
+    margin: 8px 8px;
+}

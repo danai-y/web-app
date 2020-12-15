@@ -10,16 +10,16 @@ export class CusNavService {
   private tablesPath = "tables";
   private tablesRef!: AngularFireList<any>;
 
-  constructor(public db: AngularFireDatabase) { 
+  constructor(public db: AngularFireDatabase) {
     this.tablesRef = this.db.list(this.tablesPath);
   }
 
   setTableId(id: number) {
     this.tableId = id;
     this.db.list(this.tablesPath, ref => ref.orderByChild('id').equalTo(this.tableId))
-    .snapshotChanges().subscribe(tables => {
-      this.table = tables[0];
-    });
+      .snapshotChanges().subscribe(tables => {
+        this.table = tables[0];
+      });
   }
 
   getTableName(): string {
@@ -27,6 +27,16 @@ export class CusNavService {
   }
 
   billTable() {
-    this.tablesRef.update(this.table.key, {'status': 3});
+    this.tablesRef.update(this.table.key, { 'status': 3 });
+  }
+
+  inService() {
+    if (this.table.payload.val().status != 2) {
+      this.tablesRef.update(this.table.key, { 'status': 2 });
+    }
+  }
+
+  setTableFree() {
+    this.tablesRef.update(this.table.key, { 'status': 1 });
   }
 }

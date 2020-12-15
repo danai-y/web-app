@@ -4,9 +4,12 @@
             {{order.payload.val().table}} | {{order.payload.val().dish}}
         </mat-card-title>
         <mat-card-content>
-            <span>
+            <div>
                 {{orderStatus[order.payload.val().status]}}
-            </span>
+            </div>
+            <div *ngIf="order.payload.val().note != '-'">
+                Note: {{order.payload.val().note}}
+            </div>
             <button *ngIf="order.payload.val().status == 0" mat-raised-button color="primary"
                 (click)="prepareOrder(order)">
                 Preparing

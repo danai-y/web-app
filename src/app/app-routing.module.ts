@@ -12,7 +12,6 @@ import { AngularFireAuthGuard, hasCustomClaim, redirectUnauthorizedTo, redirectL
 import { EditTableComponent } from './admin/edit-table/edit-table.component';
 import { EditMenuComponent } from './admin/edit-menu/edit-menu.component';
 import { AdminNavComponent } from './admin/admin-nav/admin-nav.component';
-import { TableFormComponent } from './admin/table-form/table-form.component';
 import { MenuFormComponent } from './admin/menu-form/menu-form.component';
 import { BillingComponent } from './res/billing/billing.component';
 import { ReportComponent } from './res/report/report.component';
@@ -30,7 +29,6 @@ const routes: Routes = [
     children: [
       { path: '', component: EditTableComponent },
       { path: 'edit-menu', component: EditMenuComponent },
-      { path: 'table-form', component: TableFormComponent },
       { path: 'menu-form', component: MenuFormComponent },
     ]
   },

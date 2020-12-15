@@ -5,30 +5,35 @@
         </mat-card-title>
         <mat-card-content>
             <div>price: {{order.payload.val().price}}</div>
+            <div>note: {{order.payload.val().note}}</div>
             <div>status: {{orderStatus[order.payload.val().status]}}</div>
             <button *ngIf="order.payload.val().status != 2" mat-raised-button color="primary"
                 (click)="serveOrder(order)">
                 Served
             </button>
-            <button mat-raised-button color="warn">
+            <button mat-raised-button color="warn" (click)="cancelOrder(order)">
                 Cancel
             </button>
         </mat-card-content>
     </mat-card>
 </div>
 
-<span *ngIf="totalPrice > 0">
-    Total: {{ totalPrice }}
-</span>
-<span *ngIf="totalPrice < 0">
-    Unable to get total!
-</span>
-<button *ngIf="totalPrice == 0" mat-raised-button color="primary" (click)="getTotal()">
-    Get total
-</button>
-<button *ngIf="totalPrice > 0" mat-raised-button color="primary" (click)="bill()" routerLink="/manage">
+<div class="add-margin" *ngIf="totalPrice$">
+    <span class="total-price">
+        Total: {{ totalPrice$ | async }} + 
+    </span>
+    <mat-form-field appearance="outline">
+        <mat-label>Additional Cost</mat-label>
+        <input [(ngModel)]="addPrice" matInput autocomplete="off">
+    </mat-form-field>
+</div>
+<div class="add-margin" *ngIf="!allServed">
+    Some dishes have not been served.
+</div>
+
+<button *ngIf="allServed" class="add-margin" mat-raised-button color="primary" (click)="bill()" routerLink="/manage">
     Paid
 </button>
-<button mat-raised-button color="warn" (click)="cancelBilling()" routerLink="/manage">
+<button class="add-margin" mat-raised-button color="warn" (click)="cancelBilling()" routerLink="/manage">
     Cancel billing
 </button>

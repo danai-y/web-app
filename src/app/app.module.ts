@@ -18,7 +18,7 @@ import { MatListModule } from '@angular/material/list';
 import { CusNavComponent } from './cus/cus-nav/cus-nav.component';
 import { TableListComponent } from './res/table-list/table-list.component';
 import { OrderListComponent } from './res/order-list/order-list.component';
-import { MenuComponent } from './cus/menu/menu.component';
+import { MenuComponent, AddOrderDialog } from './cus/menu/menu.component';
 import { OrderComponent } from './cus/order/order.component';
 import { MatCardModule } from '@angular/material/card';
 import { MenuListComponent } from './res/menu-list/menu-list.component';
@@ -27,7 +27,6 @@ import { LoginComponent } from './login/login.component';
 import { EditTableComponent } from './admin/edit-table/edit-table.component';
 import { EditMenuComponent } from './admin/edit-menu/edit-menu.component';
 import { AdminNavComponent } from './admin/admin-nav/admin-nav.component';
-import { TableFormComponent } from './admin/table-form/table-form.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -38,6 +37,8 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatTableModule } from '@angular/material/table';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatBadgeModule } from '@angular/material/badge';
 
 @NgModule({
   declarations: [
@@ -53,10 +54,10 @@ import { MatTableModule } from '@angular/material/table';
     EditTableComponent,
     EditMenuComponent,
     AdminNavComponent,
-    TableFormComponent,
     MenuFormComponent,
     BillingComponent,
-    ReportComponent
+    ReportComponent,
+    AddOrderDialog,
   ],
   imports: [
     BrowserModule,
@@ -80,6 +81,8 @@ import { MatTableModule } from '@angular/material/table';
     MatDatepickerModule,
     MatNativeDateModule,
     MatTableModule,
+    MatDialogModule,
+    MatBadgeModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
