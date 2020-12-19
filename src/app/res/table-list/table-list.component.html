@@ -1,7 +1,7 @@
 <div *ngFor="let table of tableList">
     <mat-card>
         <span class="table-name">
-            {{table.payload.val().name}}
+            Table {{table.payload.val().id}}
         </span>
         <span>
             {{tableStatus[table.payload.val().status]}}

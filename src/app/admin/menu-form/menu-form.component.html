@@ -8,6 +8,18 @@
             <mat-label>Price</mat-label>
             <input [(ngModel)]="price" matInput placeholder="Placeholder">
         </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label>Category</mat-label>
+            <mat-select [(value)]="category">
+                <mat-option>Uncategorized</mat-option>
+                <mat-option [value]="item.id" *ngFor="let item of categories">{{item.name}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+        <img *ngIf="imageUrl" [src]="imageUrl | async" width="250">
+        <div>
+            <label for="file">Image </label>
+            <input type="file" (change)="selectFile($event)" accept=".png,.jpg" />
+        </div>
     </div>
     <div>
         <button mat-raised-button type="submit" (click)="saveDish()" routerLink="/admin/edit-menu">

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { MenuFormService } from '../menu-form.service';
-import { MatInput } from '@angular/material/input';
+import { AngularFireStorage } from '@angular/fire/storage'
+import { Observable } from 'rxjs';
+import { AngularFireDatabase, AngularFireList } from '@angular/fire/database';
 
 @Component({
   selector: 'app-menu-form',
@@ -12,12 +14,22 @@ export class MenuFormComponent implements OnInit {
   dishName!: string;
   price!: number;
   dishKey!: string;
+  imageFile!: File;
+  imageUrl!: Observable<string>;
+  categories!: any;
+  category: number = 0;
+  menuRef!: AngularFireList<any>;
 
-  constructor(public menuFormService: MenuFormService) {
+  constructor(
+    private menuFormService: MenuFormService,
+    private storage: AngularFireStorage,
+    private db: AngularFireDatabase
+  ) {
     this.dishKey = menuFormService.dishKey;
+    this.menuRef = db.list("menu");
+    this.getCategoryList();
     if (this.dishKey != '0') {
-      this.dishName = menuFormService.dish.name;
-      this.price = menuFormService.dish.price;
+      this.getExistingData();
     }
   }
 
@@ -25,12 +37,56 @@ export class MenuFormComponent implements OnInit {
   }
 
   saveDish() {
+    let menuList;
+    let duplicatedName = false;
     if (this.dishKey == '0') {
-      this.menuFormService.addDish(this.dishName, this.price);
+      this.menuRef.valueChanges().subscribe(items => {
+        items.forEach(dish => {
+          if (this.dishName == dish.name) {
+            duplicatedName = true;
+          }
+        });
+      })
+      if (duplicatedName) { return }
+      this.menuRef.push({
+        'name': this.dishName,
+        'price': Number(this.price),
+        'status': 0,
+        'category': Number(this.category)
+      });
     } else {
-      console.log(this.dishName);
-      this.menuFormService.editDish(this.dishKey, this.dishName, this.price);
+      this.menuRef.update(this.dishKey, {
+        'name': this.dishName,
+        'price': Number(this.price),
+        'category': Number(this.category)
+      });
+      this.uploadImage(this.dishKey);
     }
+  }
+
+  selectFile(event: any) {
+    this.imageFile = event.target.files[0]
+  }
+
+  uploadImage(name: string) {
+    console.log(this.imageFile)
+    if (this.imageFile) {
+      this.storage.upload('/menu-image/' + name, this.imageFile);
+    }
+  }
+
+  getExistingData() {
+    this.dishName = this.menuFormService.dish.name;
+    this.price = this.menuFormService.dish.price;
+    this.category = this.menuFormService.dish.category;
+    const ref = this.storage.ref('menu-image/' + this.dishKey);
+    this.imageUrl = ref.getDownloadURL();
+  }
+
+  getCategoryList() {
+    this.db.list("categories").valueChanges().subscribe(items => {
+      this.categories = items;
+    })
   }
 
 }

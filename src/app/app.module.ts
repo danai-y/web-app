@@ -39,6 +39,9 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { MatTableModule } from '@angular/material/table';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatBadgeModule } from '@angular/material/badge';
+import { AngularFireStorageModule } from '@angular/fire/storage';
+import { EditCategoryComponent } from './admin/edit-category/edit-category.component';
+import { CategoryFormComponent } from './admin/category-form/category-form.component'
 
 @NgModule({
   declarations: [
@@ -58,6 +61,8 @@ import { MatBadgeModule } from '@angular/material/badge';
     BillingComponent,
     ReportComponent,
     AddOrderDialog,
+    EditCategoryComponent,
+    CategoryFormComponent,
   ],
   imports: [
     BrowserModule,
@@ -83,6 +88,7 @@ import { MatBadgeModule } from '@angular/material/badge';
     MatTableModule,
     MatDialogModule,
     MatBadgeModule,
+    AngularFireStorageModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

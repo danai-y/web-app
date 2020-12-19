@@ -10,15 +10,16 @@ import { MenuFormService } from '../menu-form.service';
 export class EditMenuComponent implements OnInit {
 
   menuRef!: AngularFireList<any>;
-  menuPath = "menu";
   menu!: any[];
 
-  constructor(private db: AngularFireDatabase, public menuFormService: MenuFormService) {
-    this.menuRef = db.list(this.menuPath);
-    db.list(this.menuPath).snapshotChanges()
-      .subscribe(menu => {
-        this.menu = menu;
-      });
+  constructor(
+    private db: AngularFireDatabase,
+    public menuFormService: MenuFormService
+  ) {
+    this.menuRef = db.list("menu");
+    db.list("menu", ref => ref.orderByChild('category')).snapshotChanges().subscribe(items => {
+      this.menu = items;
+    });
   }
 
   ngOnInit(): void {

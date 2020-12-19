@@ -1,0 +1,15 @@
+<button class="add-button" mat-raised-button color="accent" (click)="addCategory()">
+    Add
+</button>
+<button mat-raised-button color="warn" (click)="deleteCategory()">
+    Delete
+</button>
+
+<div *ngFor="let category of categories">
+    <mat-card>
+        {{category.payload.val().name}}
+        <button routerLink="/admin/category-form" (click)="editCategory(category)" mat-raised-button color="primary">
+            Edit
+        </button>
+    </mat-card>
+</div>

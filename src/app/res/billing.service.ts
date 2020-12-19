@@ -5,7 +5,7 @@ import { AngularFireDatabase, AngularFireList } from '@angular/fire/database';
 
 export class BillingService {
 
-  public tableName!: string;
+  public tableId!: number;
 
   private billingTable!: any;
   private tablesPath = "tables";
@@ -15,9 +15,9 @@ export class BillingService {
     this.tablesRef = this.db.list(this.tablesPath);
   }
 
-  setTableName(name: string) {
-    this.tableName = name;
-    this.db.list(this.tablesPath, ref => ref.orderByChild('name').equalTo(name))
+  setTableId(id: number) {
+    this.tableId = id;
+    this.db.list(this.tablesPath, ref => ref.orderByChild('id').equalTo(id))
       .snapshotChanges().subscribe(tables => {
         this.billingTable = tables[0];
       });

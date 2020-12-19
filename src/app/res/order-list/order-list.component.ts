@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFireDatabase, AngularFireList } from '@angular/fire/database';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-order-list',
@@ -10,15 +11,12 @@ export class OrderListComponent implements OnInit {
 
   ordersPath = "orders";
   ordersRef!: AngularFireList<any>;
-  orderList!: any[];
+  orderList!: Observable<any>;
   orderStatus = ["pending", "preparing", "served"];
 
   constructor(db: AngularFireDatabase) {
     this.ordersRef = db.list(this.ordersPath);
-    db.list(this.ordersPath).snapshotChanges()
-      .subscribe(orders => {
-        this.orderList = orders;
-      });
+    this.orderList = this.ordersRef.snapshotChanges();
   }
 
   ngOnInit(): void {

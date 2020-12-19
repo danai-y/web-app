@@ -17,7 +17,7 @@ export class OrderComponent implements OnInit {
 
   constructor(private cusNavService: CusNavService, private db: AngularFireDatabase) {
     this.ordersRef = db.list(this.ordersPath);
-    db.list(this.ordersPath, ref => ref.orderByChild('table').equalTo(cusNavService.getTableName()))
+    db.list(this.ordersPath, ref => ref.orderByChild('table').equalTo(cusNavService.tableId))
       .snapshotChanges().subscribe(orders => {
         this.orders = orders;
         this.noOrders = orders.length;

@@ -1,0 +1,16 @@
+<div class="form-container">
+    <div>
+        <mat-form-field appearance="outline">
+            <mat-label>Category Name</mat-label>
+            <input [(ngModel)]="categoryName" matInput placeholder="Placeholder">
+        </mat-form-field>
+    </div>
+    <div>
+        <button mat-raised-button type="submit" (click)="saveCategory()" routerLink="/admin/edit-category">
+            Save
+        </button>
+        <button mat-raised-button type="submit" routerLink="/admin/edit-category">
+            Cancel
+        </button>
+    </div>
+</div>

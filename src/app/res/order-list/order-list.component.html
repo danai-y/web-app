@@ -1,7 +1,7 @@
-<div *ngFor="let order of orderList">
+<div *ngFor="let order of orderList | async">
     <mat-card>
         <mat-card-title>
-            {{order.payload.val().table}} | {{order.payload.val().dish}}
+            Table {{order.payload.val().table}} | {{order.payload.val().dish}}
         </mat-card-title>
         <mat-card-content>
             <div>

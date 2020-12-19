@@ -15,6 +15,8 @@ import { AdminNavComponent } from './admin/admin-nav/admin-nav.component';
 import { MenuFormComponent } from './admin/menu-form/menu-form.component';
 import { BillingComponent } from './res/billing/billing.component';
 import { ReportComponent } from './res/report/report.component';
+import { EditCategoryComponent } from './admin/edit-category/edit-category.component';
+import { CategoryFormComponent } from './admin/category-form/category-form.component';
 
 const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['login']);
 
@@ -29,7 +31,9 @@ const routes: Routes = [
     children: [
       { path: '', component: EditTableComponent },
       { path: 'edit-menu', component: EditMenuComponent },
+      { path: 'edit-category', component: EditCategoryComponent },
       { path: 'menu-form', component: MenuFormComponent },
+      { path: 'category-form', component: CategoryFormComponent },
     ]
   },
   {

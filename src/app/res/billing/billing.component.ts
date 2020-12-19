@@ -28,7 +28,7 @@ export class BillingComponent implements OnInit {
     this.transRef = db.list(this.transPath);
     this.inactiveRaf = db.list(this.inactivePath);
 
-    db.list(this.ordersPath, ref => ref.orderByChild('table').equalTo(billingService.tableName))
+    db.list(this.ordersPath, ref => ref.orderByChild('table').equalTo(billingService.tableId))
       .snapshotChanges().subscribe(orders => {
         this.orders = orders;
         let totalPrice = 0;
@@ -67,7 +67,7 @@ export class BillingComponent implements OnInit {
     const key = this.transRef.push({
       'date': date,
       'time': time,
-      'table': this.billingService.tableName,
+      'table': this.billingService.tableId,
       'total': Number(totalPrice) + Number(this.addPrice)
     }).key;
     this.moveOrdersToInactive(key);

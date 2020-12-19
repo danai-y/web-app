@@ -1,6 +1,5 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { AngularFireDatabase, AngularFireList } from '@angular/fire/database';
-import { ActivatedRoute } from '@angular/router';
 import { CusNavService } from '../cus-nav.service';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
@@ -11,26 +10,18 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dial
 })
 export class MenuComponent implements OnInit {
 
-  animal!: string;
-  name!: string;
-
   ordersRef!: AngularFireList<any>;
   menu!: any[];
-  tableName!: string;
-  menuPath = "menu";
-  ordersPath = "orders";
 
   constructor(
     private db: AngularFireDatabase,
-    private route: ActivatedRoute,
     private cusNavService: CusNavService,
-    public dialog: MatDialog
+    private dialog: MatDialog,
   ) {
-    this.ordersRef = db.list(this.ordersPath);
-    db.list(this.menuPath).valueChanges()
-      .subscribe(menu => {
-        this.menu = menu;
-      });
+    this.ordersRef = this.db.list("orders");
+    db.list("menu", ref => ref.orderByChild('category')).valueChanges().subscribe(items => {
+      this.menu = items;
+    });
   }
 
   ngOnInit(): void {
@@ -40,10 +31,10 @@ export class MenuComponent implements OnInit {
     if (!order.note) {
       order.note = "-";
     }
-    this.tableName = this.cusNavService.getTableName();
+    let tableId = this.cusNavService.tableId;
     this.ordersRef.push({
       'dish': order.dish,
-      'table': this.tableName,
+      'table': tableId,
       'price': Number(order.price),
       'status': 0,
       'note': order.note

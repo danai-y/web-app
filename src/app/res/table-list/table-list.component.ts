@@ -35,7 +35,7 @@ export class TableListComponent implements OnInit {
   }
 
   billTable(table: any) {
-    this.billingService.setTableName(table.payload.val().name);
+    this.billingService.setTableId(table.payload.val().id);
   }
 
 }
