@@ -1,15 +1,21 @@
-<div *ngFor="let dish of menu">
-    <mat-card>
-        <mat-card-title>
-            {{dish.name}}
-        </mat-card-title>
-        <mat-card-content>
-            <span>
-                price: {{dish.price}}
-            </span>
-            <button *ngIf="dish.status != 0" mat-raised-button color="primary" (click)="openDialog(dish)">
-                Order
-            </button>
-        </mat-card-content>
-    </mat-card>
+<h1>Recommendation</h1>
+<mat-grid-list cols="2" rowHeight="1:1">
+    <div *ngFor="let dish of menu">
+        <mat-grid-tile *ngIf="dish.recommended == 1" (click)="openDialog(dish)">
+            <mat-grid-tile-header>{{dish.name}} ({{dish.price}}฿)</mat-grid-tile-header>
+            <img [src]="dish.image" style="object-fit: cover; width: 100%; height: 100%;">
+        </mat-grid-tile>
+    </div>
+</mat-grid-list>
+
+<div *ngFor="let category of categories">
+    <h2>{{category.name}}</h2>
+    <mat-grid-list cols="2" rowHeight="1:1">
+    <div *ngFor="let dish of menu">
+        <mat-grid-tile *ngIf="dish.status == 1 && dish.category == category.id" (click)="openDialog(dish)">
+            <mat-grid-tile-header>{{dish.name}} ({{dish.price}}฿)</mat-grid-tile-header>
+            <img [src]="dish.image" style="object-fit: cover; width: 100%; height: 100%;">
+        </mat-grid-tile>
+    </div>
+</mat-grid-list>
 </div>

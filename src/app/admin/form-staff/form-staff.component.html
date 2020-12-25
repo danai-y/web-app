@@ -1,0 +1,30 @@
+<div class="form-container">
+    <div *ngIf="action == 'edit' || action == 'add'">
+        <mat-form-field appearance="outline">
+            <mat-label>Name</mat-label>
+            <input [(ngModel)]="staffName" matInput>
+        </mat-form-field>
+    </div>
+    <div *ngIf="action == 'add' || action == 'delete'">
+        <mat-form-field appearance="outline">
+            <mat-label>E-mail</mat-label>
+            <input [(ngModel)]="email" matInput>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label>Password</mat-label>
+            <input [(ngModel)]="password" type="password" matInput>
+        </mat-form-field>
+    </div>
+    <div>
+        <button *ngIf="action == 'add' || action == 'edit'" mat-raised-button type="submit" (click)="addNewStaff()" routerLink="/login">
+            Save
+        </button>
+        <button *ngIf="action == 'delete'" mat-raised-button type="submit" (click)="deleteStaff()" routerLink="/login">
+            Delete
+        </button>
+        <button mat-raised-button type="submit" routerLink="/admin/edit-staff">
+            Cancel
+        </button>
+
+    </div>
+</div>

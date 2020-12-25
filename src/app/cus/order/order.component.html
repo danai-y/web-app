@@ -4,8 +4,9 @@
             {{order.payload.val().dish}}
         </mat-card-title>
         <mat-card-content>
-            <div>price: {{order.payload.val().price}}</div>
-            <div>status: {{orderStatus[order.payload.val().status]}}</div>
+            <div>Price: {{order.payload.val().price}}</div>
+            <div>Status: {{orderStatus[order.payload.val().status]}}</div>
+            <div>Note: {{order.payload.val().note}}</div>
             <button *ngIf="order.payload.val().status == 0" mat-raised-button color="warn" (click)="cancelOrder(order)">
                 Cancel
             </button>

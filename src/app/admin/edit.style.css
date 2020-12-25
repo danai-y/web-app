@@ -1,0 +1,30 @@
+.name {
+    display: table-cell;
+    font-size: 18px;
+    min-width: 150px;
+}
+
+.button-row {
+    display: table-cell;
+    width: 100%;
+}
+
+.flex-container {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+button {
+    margin-left: 8px;
+}
+
+.mat-card {
+    padding: 8px 8px 8px 16px;
+    margin-bottom: 1px;
+}
+
+.top-button-row {
+    margin: 8px;
+}

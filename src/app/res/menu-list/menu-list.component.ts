@@ -9,15 +9,13 @@ import { AngularFireDatabase, AngularFireList } from '@angular/fire/database';
 export class MenuListComponent implements OnInit {
 
   menuRef!: AngularFireList<any>;
-  menuPath = "menu";
   menu!: any[];
 
   constructor(private db: AngularFireDatabase,) {
-    this.menuRef = db.list(this.menuPath);
-    db.list(this.menuPath).snapshotChanges()
-      .subscribe(menu => {
-        this.menu = menu;
-      });
+    this.menuRef = db.list('menu');
+    db.list('menu', ref => ref.orderByChild('category')).snapshotChanges().subscribe(menu => {
+      this.menu = menu;
+    });
   }
 
   ngOnInit(): void {

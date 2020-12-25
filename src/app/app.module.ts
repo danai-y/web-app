@@ -30,7 +30,7 @@ import { AdminNavComponent } from './admin/admin-nav/admin-nav.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MenuFormComponent } from './admin/menu-form/menu-form.component';
+import { MenuFormComponent } from './admin/form-menu/menu-form.component';
 import { BillingComponent } from './res/billing/billing.component';
 import { ReportComponent } from './res/report/report.component';
 import { MatSelectModule } from '@angular/material/select';
@@ -41,7 +41,11 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatBadgeModule } from '@angular/material/badge';
 import { AngularFireStorageModule } from '@angular/fire/storage';
 import { EditCategoryComponent } from './admin/edit-category/edit-category.component';
-import { CategoryFormComponent } from './admin/category-form/category-form.component'
+import { CategoryFormComponent } from './admin/form-category/category-form.component'
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatGridListModule } from '@angular/material/grid-list';
+import { EditStaffComponent } from './admin/edit-staff/edit-staff.component';
+import { FormStaffComponent } from './admin/form-staff/form-staff.component';
 
 @NgModule({
   declarations: [
@@ -63,6 +67,8 @@ import { CategoryFormComponent } from './admin/category-form/category-form.compo
     AddOrderDialog,
     EditCategoryComponent,
     CategoryFormComponent,
+    EditStaffComponent,
+    FormStaffComponent,
   ],
   imports: [
     BrowserModule,
@@ -89,6 +95,8 @@ import { CategoryFormComponent } from './admin/category-form/category-form.compo
     MatDialogModule,
     MatBadgeModule,
     AngularFireStorageModule,
+    MatCheckboxModule,
+    MatGridListModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

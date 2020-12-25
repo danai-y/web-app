@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFireDatabase, AngularFireList } from '@angular/fire/database';
-import { MenuFormService } from '../menu-form.service';
+import { FormService } from '../form.service';
 
 @Component({
   selector: 'app-edit-menu',
   templateUrl: './edit-menu.component.html',
-  styleUrls: ['./edit-menu.component.css']
+  styleUrls: ['../edit.style.css']
 })
 export class EditMenuComponent implements OnInit {
 
@@ -14,9 +14,9 @@ export class EditMenuComponent implements OnInit {
 
   constructor(
     private db: AngularFireDatabase,
-    public menuFormService: MenuFormService
+    public formService: FormService
   ) {
-    this.menuRef = db.list("menu");
+    this.menuRef = this.db.list("menu");
     db.list("menu", ref => ref.orderByChild('category')).snapshotChanges().subscribe(items => {
       this.menu = items;
     });
@@ -26,12 +26,11 @@ export class EditMenuComponent implements OnInit {
   }
 
   addDish() {
-    this.menuFormService.setKey('0');
+    this.formService.setDish(null);
   }
 
-  editKeyDish(key: any, dish: any) {
-    this.menuFormService.setKey(key);
-    this.menuFormService.setDish(dish);
+  editDish(snap: any) {
+    this.formService.setDish(snap);
   }
 
   deleteDish(key: any) {

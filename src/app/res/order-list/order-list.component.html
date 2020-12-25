@@ -1,5 +1,5 @@
 <div *ngFor="let order of orderList | async">
-    <mat-card>
+    <mat-card *ngIf="order.payload.val().status != 2">
         <mat-card-title>
             Table {{order.payload.val().table}} | {{order.payload.val().dish}}
         </mat-card-title>
@@ -18,6 +18,24 @@
                 (click)="serveOrder(order)">
                 Served
             </button>
+            <button mat-raised-button color="warn" (click)="cancelOrder(order)">
+                Cancel
+            </button>
+        </mat-card-content>
+    </mat-card>
+</div>
+<div *ngFor="let order of orderList | async">
+    <mat-card *ngIf="order.payload.val().status == 2">
+        <mat-card-title>
+            Table {{order.payload.val().table}} | {{order.payload.val().dish}}
+        </mat-card-title>
+        <mat-card-content>
+            <div>
+                {{orderStatus[order.payload.val().status]}}
+            </div>
+            <div *ngIf="order.payload.val().note != '-'">
+                Note: {{order.payload.val().note}}
+            </div>
             <button mat-raised-button color="warn" (click)="cancelOrder(order)">
                 Cancel
             </button>

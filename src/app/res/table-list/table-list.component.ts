@@ -11,16 +11,26 @@ export class TableListComponent implements OnInit {
 
   tableList!: any[];
   tableStatus = ["unavailable", "available", "in-service", "billing"];
-  tablesPath = "tables";
   tablesRef!: AngularFireList<any>;
 
-  constructor(db: AngularFireDatabase, public billingService: BillingService) {
-
-    this.tablesRef = db.list(this.tablesPath);
-    db.list(this.tablesPath).snapshotChanges()
-      .subscribe(tables => {
-        this.tableList = tables;
-      });
+  constructor(
+    private db: AngularFireDatabase,
+    private billingService: BillingService
+  ) {
+    this.tablesRef = this.db.list('tables');
+    this.tablesRef.snapshotChanges().subscribe(tables => {
+      this.tableList = tables;
+      this.tableList.forEach(table => {
+        if (table.payload.val().status == 2) {
+          db.list('orders', ref => ref.orderByChild('table').equalTo(table.payload.val().id))
+            .valueChanges().subscribe(orders => {
+              if (orders.length == 0) {
+                this.enableTable(table);
+              }
+            })
+        }
+      })
+    });
   }
 
   ngOnInit(): void {

@@ -15,7 +15,10 @@
                 <mat-option [value]="item.id" *ngFor="let item of categories">{{item.name}}</mat-option>
             </mat-select>
         </mat-form-field>
-        <img *ngIf="imageUrl" [src]="imageUrl | async" width="250">
+        <div class="checkbox">
+            <mat-checkbox [(ngModel)]="recommended">Recommended</mat-checkbox>
+        </div>
+        <img *ngIf="imageUrl" [src]="imageUrl" width="250">
         <div>
             <label for="file">Image </label>
             <input type="file" (change)="selectFile($event)" accept=".png,.jpg" />

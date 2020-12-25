@@ -3,7 +3,13 @@
       [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
       [mode]="(isHandset$ | async) ? 'over' : 'side'"
       [opened]="(isHandset$ | async) === false">
-    <mat-toolbar></mat-toolbar>
+    <mat-toolbar>
+      <span>{{user.name}}</span>
+      <span style="flex: auto;"></span>
+      <button mat-icon-button (click)="logout()">
+        <mat-icon>login</mat-icon>
+      </button>
+    </mat-toolbar>
     <mat-nav-list>
       <a mat-list-item (click)="drawer.toggle()" routerLink="">Table List</a>
       <a mat-list-item (click)="drawer.toggle()" routerLink="order-list">Order List</a>

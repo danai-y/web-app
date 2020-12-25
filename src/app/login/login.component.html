@@ -1,8 +1,21 @@
-<div *ngIf="auth.afAuth.user | async as user; else showLogin">
-    <h1>Hello {{ user.displayName }}!</h1>
-    <button (click)="auth.logout()">Logout</button>
+<div *ngIf="authService.auth.user | async as user; else showLogin">
+    <h1>Hello {{ user.email }}!</h1>
+    <button mat-raised-button routerLink="/admin">Admin</button>
+    <button mat-raised-button routerLink="/manage">Manage</button>
+    <button mat-raised-button (click)="authService.logout()">Logout</button>
 </div>
 <ng-template #showLogin>
-    <p>Please login.</p>
-    <button (click)="auth.login()">Login with Google</button>
+    <mat-form-field appearance="outline">
+        <mat-label>Username</mat-label>
+        <input [(ngModel)]="username" type="email" matInput>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+        <mat-label>Password</mat-label>
+        <input [(ngModel)]="password" type="password" matInput>
+    </mat-form-field>
+    <div>
+        <button mat-raised-button type="submit" (click)="login()">
+            Login
+        </button>
+    </div>
 </ng-template>

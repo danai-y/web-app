@@ -1,34 +1,37 @@
 import { Component, OnInit } from '@angular/core';
-import { MenuFormService } from '../menu-form.service';
+import { FormService } from '../form.service';
 import { AngularFireStorage } from '@angular/fire/storage'
 import { Observable } from 'rxjs';
+import { finalize } from 'rxjs/operators';
 import { AngularFireDatabase, AngularFireList } from '@angular/fire/database';
 
 @Component({
   selector: 'app-menu-form',
   templateUrl: './menu-form.component.html',
-  styleUrls: ['./menu-form.component.css']
+  styleUrls: ['../form.style.css']
 })
 export class MenuFormComponent implements OnInit {
 
+  dishKey!: string;
+  categories!: any;
+  menuRef!: AngularFireList<any>;
+  uploadPercent!: Observable<number | undefined>;
+
   dishName!: string;
   price!: number;
-  dishKey!: string;
-  imageFile!: File;
-  imageUrl!: Observable<string>;
-  categories!: any;
-  category: number = 0;
-  menuRef!: AngularFireList<any>;
+  category!: number;
+  imageUrl!: string;
+  recommended: boolean = false;
 
   constructor(
-    private menuFormService: MenuFormService,
+    private formService: FormService,
     private storage: AngularFireStorage,
     private db: AngularFireDatabase
   ) {
-    this.dishKey = menuFormService.dishKey;
     this.menuRef = db.list("menu");
     this.getCategoryList();
-    if (this.dishKey != '0') {
+    if (this.formService.dishSnap) {
+      this.dishKey = formService.dishSnap.key;
       this.getExistingData();
     }
   }
@@ -37,9 +40,8 @@ export class MenuFormComponent implements OnInit {
   }
 
   saveDish() {
-    let menuList;
     let duplicatedName = false;
-    if (this.dishKey == '0') {
+    if (this.formService.dishSnap) {
       this.menuRef.valueChanges().subscribe(items => {
         items.forEach(dish => {
           if (this.dishName == dish.name) {
@@ -52,35 +54,40 @@ export class MenuFormComponent implements OnInit {
         'name': this.dishName,
         'price': Number(this.price),
         'status': 0,
-        'category': Number(this.category)
+        'category': Number(this.category),
+        'recommended': (this.recommended == true) ? 1 : 0,
+        'image': this.imageUrl
       });
     } else {
       this.menuRef.update(this.dishKey, {
         'name': this.dishName,
         'price': Number(this.price),
-        'category': Number(this.category)
+        'category': Number(this.category),
+        'recommended': (this.recommended == true) ? 1 : 0,
+        'image': this.imageUrl
       });
-      this.uploadImage(this.dishKey);
     }
   }
 
   selectFile(event: any) {
-    this.imageFile = event.target.files[0]
-  }
-
-  uploadImage(name: string) {
-    console.log(this.imageFile)
-    if (this.imageFile) {
-      this.storage.upload('/menu-image/' + name, this.imageFile);
-    }
+    const file = event.target.files[0];
+    const filePath = 'menu-image/' + this.dishKey;
+    const fileRef = this.storage.ref(filePath);
+    const task = this.storage.upload(filePath, file);
+    task.percentageChanges().pipe(
+      finalize(() => fileRef.getDownloadURL().subscribe(url => {
+        this.imageUrl = url;
+      }))
+    ).subscribe(console.log)
   }
 
   getExistingData() {
-    this.dishName = this.menuFormService.dish.name;
-    this.price = this.menuFormService.dish.price;
-    this.category = this.menuFormService.dish.category;
-    const ref = this.storage.ref('menu-image/' + this.dishKey);
-    this.imageUrl = ref.getDownloadURL();
+    let dish = this.formService.dishSnap.payload.val()
+    this.dishName = dish.name;
+    this.price = dish.price;
+    this.category = dish.category;
+    this.imageUrl = dish.image;
+    this.recommended = (dish.recommended == 1) ? true : false;
   }
 
   getCategoryList() {

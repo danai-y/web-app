@@ -11,15 +11,19 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dial
 export class MenuComponent implements OnInit {
 
   ordersRef!: AngularFireList<any>;
-  menu!: any[];
+  menu!: any;
+  categories!: any;
 
   constructor(
     private db: AngularFireDatabase,
     private cusNavService: CusNavService,
     private dialog: MatDialog,
   ) {
-    this.ordersRef = this.db.list("orders");
-    db.list("menu", ref => ref.orderByChild('category')).valueChanges().subscribe(items => {
+    this.ordersRef = this.db.list('orders');
+    this.db.list('categories').valueChanges().subscribe(items => {
+      this.categories = items;
+    });
+    this.db.list('menu', ref => ref.orderByChild('category')).valueChanges().subscribe(items => {
       this.menu = items;
     });
   }
@@ -28,16 +32,13 @@ export class MenuComponent implements OnInit {
   }
 
   addOrder(order: any) {
-    if (!order.note) {
-      order.note = "-";
-    }
     let tableId = this.cusNavService.tableId;
     this.ordersRef.push({
       'dish': order.dish,
       'table': tableId,
       'price': Number(order.price),
       'status': 0,
-      'note': order.note
+      'note': (order.note) ? order.note : "-"
     });
     this.cusNavService.inService();
   }

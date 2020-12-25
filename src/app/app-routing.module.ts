@@ -8,17 +8,17 @@ import { OrderListComponent } from './res/order-list/order-list.component';
 import { OrderComponent } from './cus/order/order.component';
 import { ResNavComponent } from './res/res-nav/res-nav.component';
 import { TableListComponent } from './res/table-list/table-list.component';
-import { AngularFireAuthGuard, hasCustomClaim, redirectUnauthorizedTo, redirectLoggedInTo } from '@angular/fire/auth-guard';
 import { EditTableComponent } from './admin/edit-table/edit-table.component';
 import { EditMenuComponent } from './admin/edit-menu/edit-menu.component';
 import { AdminNavComponent } from './admin/admin-nav/admin-nav.component';
-import { MenuFormComponent } from './admin/menu-form/menu-form.component';
+import { MenuFormComponent } from './admin/form-menu/menu-form.component';
 import { BillingComponent } from './res/billing/billing.component';
 import { ReportComponent } from './res/report/report.component';
 import { EditCategoryComponent } from './admin/edit-category/edit-category.component';
-import { CategoryFormComponent } from './admin/category-form/category-form.component';
-
-const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['login']);
+import { CategoryFormComponent } from './admin/form-category/category-form.component';
+import { AuthGuard } from './auth/auth.guard';
+import { EditStaffComponent } from './admin/edit-staff/edit-staff.component';
+import { FormStaffComponent } from './admin/form-staff/form-staff.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'manage', pathMatch: 'full' },
@@ -26,19 +26,23 @@ const routes: Routes = [
   {
     path: 'admin',
     component: AdminNavComponent,
-    canActivate: [AngularFireAuthGuard],
-    data: { authGuardPipe: redirectUnauthorizedToLogin },
+    canActivate: [AuthGuard],
+    data: { roles: ['admin'] },
     children: [
       { path: '', component: EditTableComponent },
       { path: 'edit-menu', component: EditMenuComponent },
       { path: 'edit-category', component: EditCategoryComponent },
+      { path: 'edit-staff', component: EditStaffComponent },
       { path: 'menu-form', component: MenuFormComponent },
       { path: 'category-form', component: CategoryFormComponent },
+      { path: 'form-staff', component: FormStaffComponent },
     ]
   },
   {
     path: 'manage',
     component: ResNavComponent,
+    canActivate: [AuthGuard],
+    data: { roles: ['admin', 'staff'] },
     children: [
       { path: '', component: TableListComponent },
       { path: 'order-list', component: OrderListComponent },

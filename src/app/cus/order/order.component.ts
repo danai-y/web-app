@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CusNavService } from '../cus-nav.service';
-import { AngularFireDatabase, AngularFireList } from '@angular/fire/database';
+import { AngularFireDatabase } from '@angular/fire/database';
 
 @Component({
   selector: 'app-order',
@@ -9,21 +9,18 @@ import { AngularFireDatabase, AngularFireList } from '@angular/fire/database';
 })
 export class OrderComponent implements OnInit {
 
-  ordersPath = "orders";
   orders!: any[];
-  noOrders: number = 0;
+  noOrders!: number;
   orderStatus = ["pending", "preparing", "served"];
-  ordersRef!: AngularFireList<any>;
 
-  constructor(private cusNavService: CusNavService, private db: AngularFireDatabase) {
-    this.ordersRef = db.list(this.ordersPath);
-    db.list(this.ordersPath, ref => ref.orderByChild('table').equalTo(cusNavService.tableId))
+  constructor(
+    private cusNavService: CusNavService,
+    private db: AngularFireDatabase
+  ) {
+    db.list('orders', ref => ref.orderByChild('table').equalTo(cusNavService.tableId))
       .snapshotChanges().subscribe(orders => {
         this.orders = orders;
         this.noOrders = orders.length;
-        if (this.noOrders == 0) {
-          cusNavService.setTableFree();
-        }
       });
   }
 
@@ -31,7 +28,7 @@ export class OrderComponent implements OnInit {
   }
 
   cancelOrder(order: any) {
-    this.ordersRef.remove(order.key);
+    this.db.list('orders').remove(order.key);
   }
 
   billTable() {

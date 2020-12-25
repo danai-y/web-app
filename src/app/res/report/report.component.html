@@ -12,7 +12,7 @@
 
 <div *ngIf="total > 0" class="report-container">
     <p class="total">Total: {{total}}</p>
-    <mat-table [dataSource]="trans" class="mat-elevation-z8">
+    <mat-table [dataSource]="trans">
         <ng-container matColumnDef="time">
             <mat-header-cell *matHeaderCellDef> Time </mat-header-cell>
             <mat-cell *matCellDef="let tran"> {{tran.time}} </mat-cell>

@@ -36,8 +36,4 @@ export class CusNavService {
     }
   }
 
-  setTableFree() {
-    this.tablesRef.update(this.table.key, { 'status': 1 });
-  }
-
 }

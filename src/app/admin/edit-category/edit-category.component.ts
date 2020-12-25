@@ -1,24 +1,25 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFireDatabase, AngularFireList } from '@angular/fire/database';
-import { CategoryFormService } from '../category-form.service';
+import { FormService } from '../form.service';
 
 @Component({
   selector: 'app-edit-category',
   templateUrl: './edit-category.component.html',
-  styleUrls: ['./edit-category.component.css']
+  styleUrls: ['../edit.style.css']
 })
 export class EditCategoryComponent implements OnInit {
 
-  categoriesPath = "categories";
   categories!: any[];
   categoriesRef!: AngularFireList<any>;
 
-  constructor(db: AngularFireDatabase,private categoryFormService: CategoryFormService) {
-    this.categoriesRef = db.list(this.categoriesPath);
-    db.list(this.categoriesPath).snapshotChanges()
-      .subscribe(cats => {
-        this.categories = cats;
-      });
+  constructor(
+    private db: AngularFireDatabase,
+    private formService: FormService
+  ) {
+    this.categoriesRef = this.db.list('categories');
+    this.categoriesRef.snapshotChanges().subscribe(items => {
+      this.categories = items;
+    });
   }
 
   ngOnInit(): void {
@@ -34,8 +35,8 @@ export class EditCategoryComponent implements OnInit {
     this.categoriesRef.remove(lastKey);
   }
 
-  editCategory(cat: any) {
-    this.categoryFormService.setCategory(cat);
+  editCategory(category: any) {
+    this.formService.setCategory(category);
   }
 
 }

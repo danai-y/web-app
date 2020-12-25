@@ -1,0 +1,22 @@
+<div class="top-button-row">
+    <button class="add-button" mat-raised-button color="accent" (click)="addStaff()" routerLink="/admin/form-staff">
+        Add Staff
+    </button>
+</div>
+<div *ngFor="let staff of staffs">
+    <mat-card>
+        <div style="display: table;">
+            <div class="name">{{staff.payload.val().name}}</div>
+            <div class="button-row">
+                <div class="flex-container">
+                    <button mat-mini-fab color="primary" (click)="editStaff(staff)" routerLink="/admin/form-staff">
+                        <mat-icon>create</mat-icon>
+                    </button>
+                    <button mat-mini-fab color="warn" (click)="deleteStaff(staff.key)" routerLink="/admin/form-staff">
+                        <mat-icon>delete</mat-icon>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </mat-card>
+</div>
