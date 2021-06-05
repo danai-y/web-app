@@ -1,0 +1,60 @@
+<div class="form-container">
+    <div>
+        <mat-form-field appearance="fill">
+            <mat-label>Date</mat-label>
+            <input matInput [matDatepicker]="picker1" [formControl]="date">
+            <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+            <mat-datepicker touchUi #picker1></mat-datepicker>
+        </mat-form-field>
+    </div>
+    <button mat-raised-button type="submit" color="primary" (click)="getDaily()">
+        Daily
+    </button>
+    <button mat-raised-button type="submit" color="primary" (click)="getMonthly()">
+        Monthly
+    </button>
+</div>
+
+<div *ngIf="total == 0" class="loading">
+    Loading...
+</div>
+
+<div *ngIf="type == 'daily'">
+    <div *ngIf="display$ | async" class="report-container">
+        <p class="total">Total: {{total}}</p>
+        <mat-table [dataSource]="dataList">
+            <ng-container matColumnDef="dish">
+                <mat-header-cell *matHeaderCellDef> Dish </mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.dish}} </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="count">
+                <mat-header-cell *matHeaderCellDef> Count </mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.count}} </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="total">
+                <mat-header-cell *matHeaderCellDef> Total </mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.total}} </mat-cell>
+            </ng-container>
+            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+        </mat-table>
+    </div>
+</div>
+
+<div *ngIf="type == 'monthly'">
+    <div *ngIf="display$ | async" class="report-container">
+        <p class="total">Total: {{total}}</p>
+        <mat-table [dataSource]="dataList">
+            <ng-container matColumnDef="date">
+                <mat-header-cell *matHeaderCellDef> Date </mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.date}} </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="total">
+                <mat-header-cell *matHeaderCellDef> Total </mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.total}} </mat-cell>
+            </ng-container>
+            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+        </mat-table>
+    </div>
+</div>

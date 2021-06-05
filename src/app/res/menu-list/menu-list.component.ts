@@ -10,9 +10,13 @@ export class MenuListComponent implements OnInit {
 
   menuRef!: AngularFireList<any>;
   menu!: any[];
+  categories!: any;
 
   constructor(private db: AngularFireDatabase,) {
-    this.menuRef = db.list('menu');
+    this.menuRef = this.db.list('menu');
+    this.db.list('categories').valueChanges().subscribe(items => {
+      this.categories = items;
+    });
     db.list('menu', ref => ref.orderByChild('category')).snapshotChanges().subscribe(menu => {
       this.menu = menu;
     });

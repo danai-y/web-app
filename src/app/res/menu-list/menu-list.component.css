@@ -1,8 +1,33 @@
-.mat-card {
-    padding: 10px 16px;
+.name {
+    display: table-cell;
+    font-size: 18px;
+    min-width: 120px;
 }
 
-.dish-name {
-    font-size: 22px;
+.button-row {
+    display: table-cell;
+    width: 100%;
+}
+
+.flex-container {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+button {
+    margin-left: 8px;
+}
+
+.mat-card {
+    padding: 8px 8px 8px 16px;
+    margin-bottom: 1px;
+}
+
+h2 {
+    padding: 8px 16px;
+    margin: 0px;
     font-weight: 500;
+    background-color: #C2C2C2;
 }

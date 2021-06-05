@@ -4,6 +4,10 @@
             <mat-label>Name</mat-label>
             <input [(ngModel)]="staffName" matInput>
         </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label>Phone</mat-label>
+            <input [(ngModel)]="staffPhone" matInput>
+        </mat-form-field>
     </div>
     <div *ngIf="action == 'add' || action == 'delete'">
         <mat-form-field appearance="outline">
@@ -16,7 +20,10 @@
         </mat-form-field>
     </div>
     <div>
-        <button *ngIf="action == 'add' || action == 'edit'" mat-raised-button type="submit" (click)="addNewStaff()" routerLink="/login">
+        <button *ngIf="action == 'add'" mat-raised-button type="submit" (click)="addNewStaff()" routerLink="/login">
+            Save
+        </button>
+        <button *ngIf="action == 'edit'" mat-raised-button type="submit" (click)="editStaff()" routerLink="/admin/edit-staff">
             Save
         </button>
         <button *ngIf="action == 'delete'" mat-raised-button type="submit" (click)="deleteStaff()" routerLink="/login">

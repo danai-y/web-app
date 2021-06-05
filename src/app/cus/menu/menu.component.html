@@ -1,7 +1,7 @@
 <h1>Recommendation</h1>
 <mat-grid-list cols="2" rowHeight="1:1">
     <div *ngFor="let dish of menu">
-        <mat-grid-tile *ngIf="dish.recommended == 1" (click)="openDialog(dish)">
+        <mat-grid-tile *ngIf="dish.status == 1 && dish.recommended == 1" (click)="openDialog(dish)">
             <mat-grid-tile-header>{{dish.name}} ({{dish.price}}฿)</mat-grid-tile-header>
             <img [src]="dish.image" style="object-fit: cover; width: 100%; height: 100%;">
         </mat-grid-tile>

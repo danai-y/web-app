@@ -1,6 +1,20 @@
 {
   "hosting": [
     {
+      "public": "dist/web-app",
+      "ignore": [
+        "firebase.json",
+        "**/.*",
+        "**/node_modules/**"
+      ],
+      "rewrites": [
+        {
+          "source": "**",
+          "destination": "/index.html"
+        }
+      ]
+    },
+    {
       "target": "web-app",
       "public": "dist/web-app",
       "ignore": [

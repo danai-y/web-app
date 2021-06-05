@@ -32,7 +32,7 @@ import { MatInputModule } from '@angular/material/input';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MenuFormComponent } from './admin/form-menu/menu-form.component';
 import { BillingComponent } from './res/billing/billing.component';
-import { ReportComponent } from './res/report/report.component';
+import { ReportComponent } from './admin/report/report.component';
 import { MatSelectModule } from '@angular/material/select';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';

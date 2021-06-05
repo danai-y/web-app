@@ -8,6 +8,7 @@ export class CusNavService {
 
   public tableId!: number;
   public noTable$ = new Subject<number>();
+  public activateWildCard$ = new Subject<boolean>();
   private table!: any;
   private tablesRef!: AngularFireList<any>;
 
@@ -20,10 +21,12 @@ export class CusNavService {
 
   setTableId(id: number) {
     this.tableId = id;
-    this.db.list("tables", ref => ref.orderByChild('id').equalTo(this.tableId))
-      .snapshotChanges().subscribe(tables => {
-        this.table = tables[0];
-      });
+    this.db.list("tables", ref => ref.orderByChild('id').equalTo(this.tableId)).snapshotChanges().subscribe(tables => {
+      this.table = tables[0];
+      if (this.table.payload.val().status == 0) {
+        this.activateWildCard$.next(true);
+      }
+    });
   }
 
   billTable() {

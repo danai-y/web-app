@@ -2,27 +2,60 @@
     <button class="add-button" mat-raised-button color="accent" (click)="addDish()" routerLink="/admin/menu-form">
         Add Dish
     </button>
+    <button class="add-button" mat-raised-button color="primary" (click)="enableAll()">
+        Enable All
+    </button>
 </div>
-<mat-card *ngFor="let dish of menu">
-    <div style="display: table;">
-        <div class="name">{{dish.payload.val().name}}</div>
-        <div class="button-row">
-            <div class="flex-container">
-                <button mat-mini-fab *ngIf="dish.payload.val().status == 0" color="primary"
-                    (click)="editDish(dish)" routerLink="/admin/menu-form">
-                    <mat-icon>create</mat-icon>
-                </button>
-                <button mat-mini-fab *ngIf="dish.payload.val().status == 0" color="warn"
-                    (click)="deleteDish(dish.key)">
-                    <mat-icon>delete</mat-icon>
-                </button>
-                <button *ngIf="dish.payload.val().status == 1" mat-raised-button color="warn"
-                    (click)="disableDish(dish)">
-                    Disable
-                </button>
+<div *ngIf="countUncategorized > 0">
+    <h2>uncategorized</h2>
+    <div *ngFor="let dish of menu">
+        <mat-card *ngIf="dish.payload.val().category == 0">
+            <div style="display: table;">
+                <div class="name">{{dish.payload.val().name}}</div>
+                <div class="button-row">
+                    <div class="flex-container">
+                        <button mat-mini-fab *ngIf="dish.payload.val().status == 0" color="primary"
+                            (click)="editDish(dish)" routerLink="/admin/menu-form">
+                            <mat-icon>create</mat-icon>
+                        </button>
+                        <button mat-mini-fab *ngIf="dish.payload.val().status == 0" color="warn"
+                            (click)="deleteDish(dish.key)">
+                            <mat-icon>delete</mat-icon>
+                        </button>
+                        <button *ngIf="dish.payload.val().status == 1" mat-raised-button color="warn"
+                            (click)="disableDish(dish)">
+                            Disable
+                        </button>
+                    </div>
+                </div>
             </div>
-        </div>
+        </mat-card>
     </div>
+</div>
 
-
-</mat-card>
+<div *ngFor="let category of categories">
+    <h2>{{category.name}}</h2>
+    <div *ngFor="let dish of menu">
+        <mat-card *ngIf="dish.payload.val().category == category.id">
+            <div style="display: table;">
+                <div class="name">{{dish.payload.val().name}}</div>
+                <div class="button-row">
+                    <div class="flex-container">
+                        <button mat-mini-fab *ngIf="dish.payload.val().status == 0" color="primary"
+                            (click)="editDish(dish)" routerLink="/admin/menu-form">
+                            <mat-icon>create</mat-icon>
+                        </button>
+                        <button mat-mini-fab *ngIf="dish.payload.val().status == 0" color="warn"
+                            (click)="deleteDish(dish.key)">
+                            <mat-icon>delete</mat-icon>
+                        </button>
+                        <button *ngIf="dish.payload.val().status == 1" mat-raised-button color="warn"
+                            (click)="disableDish(dish)">
+                            Disable
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </mat-card>
+    </div>
+</div>

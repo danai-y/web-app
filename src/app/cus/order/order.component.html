@@ -1,19 +1,16 @@
-<div *ngFor="let order of orders">
-    <mat-card>
-        <mat-card-title>
-            {{order.payload.val().dish}}
-        </mat-card-title>
-        <mat-card-content>
-            <div>Price: {{order.payload.val().price}}</div>
-            <div>Status: {{orderStatus[order.payload.val().status]}}</div>
-            <div>Note: {{order.payload.val().note}}</div>
-            <button *ngIf="order.payload.val().status == 0" mat-raised-button color="warn" (click)="cancelOrder(order)">
-                Cancel
-            </button>
-        </mat-card-content>
-    </mat-card>
-</div>
-
-<button *ngIf="noOrders > 0" mat-raised-button color="accent" (click)="billTable()">
+<mat-card *ngFor="let order of orders">
+    <mat-card-title>
+        {{order.payload.val().dish}}
+    </mat-card-title>
+    <mat-card-content>
+        <div>Price: {{order.payload.val().price}}</div>
+        <div>Note: {{order.payload.val().note}}</div>
+        <div>Status: {{orderStatus[order.payload.val().status]}}</div>
+        <button *ngIf="order.payload.val().status == 0" mat-raised-button color="warn" (click)="cancelOrder(order)">
+            Cancel
+        </button>
+    </mat-card-content>
+</mat-card>
+<button *ngIf="noOrders > 0" class="bill-button" mat-raised-button color="accent" (click)="billTable()">
     Call for billing
 </button>

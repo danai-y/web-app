@@ -11,23 +11,23 @@ export class LoginComponent {
 
   username = '';
   password = '';
+  userData: any;
 
-  constructor(
-    public authService: AuthService,
-    public router: Router
-  ) {
-    setTimeout(() => {
-      if (this.authService.userData) {
-        console.log('get user data')
-        if (authService.redirectUrl) {
-          this.router.navigate([authService.redirectUrl]);
-        }
-      }
-    }, 2000);
+  constructor(private authService: AuthService) {
+    this.authService.updateUserData$.subscribe(x => {
+      this.userData = this.authService.userData;
+    })
+    if (!this.userData) {
+      this.userData = this.authService.userData;
+    }
   }
 
   login() {
     this.authService.login(this.username, this.password);
+  }
+
+  logout() {
+    this.authService.logout();
   }
 
 }

@@ -15,3 +15,11 @@
     font-size: 20px;
     padding-left: 8px;
 }
+
+.mat-raised-button {
+    margin-right: 8px;
+}
+
+.loading {
+    margin: 16px;
+}

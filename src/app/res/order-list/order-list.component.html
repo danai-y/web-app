@@ -1,15 +1,8 @@
 <div *ngFor="let order of orderList | async">
     <mat-card *ngIf="order.payload.val().status != 2">
-        <mat-card-title>
-            Table {{order.payload.val().table}} | {{order.payload.val().dish}}
-        </mat-card-title>
-        <mat-card-content>
-            <div>
-                {{orderStatus[order.payload.val().status]}}
-            </div>
-            <div *ngIf="order.payload.val().note != '-'">
-                Note: {{order.payload.val().note}}
-            </div>
+        <div class="head">Table {{order.payload.val().table}} | {{order.payload.val().dish}}</div>
+        <div class="detail" *ngIf="order.payload.val().note != '-'">Note: {{order.payload.val().note}}</div>
+        <div class="button-row">
             <button *ngIf="order.payload.val().status == 0" mat-raised-button color="primary"
                 (click)="prepareOrder(order)">
                 Preparing
@@ -21,24 +14,13 @@
             <button mat-raised-button color="warn" (click)="cancelOrder(order)">
                 Cancel
             </button>
-        </mat-card-content>
+        </div>
     </mat-card>
 </div>
+
 <div *ngFor="let order of orderList | async">
     <mat-card *ngIf="order.payload.val().status == 2">
-        <mat-card-title>
-            Table {{order.payload.val().table}} | {{order.payload.val().dish}}
-        </mat-card-title>
-        <mat-card-content>
-            <div>
-                {{orderStatus[order.payload.val().status]}}
-            </div>
-            <div *ngIf="order.payload.val().note != '-'">
-                Note: {{order.payload.val().note}}
-            </div>
-            <button mat-raised-button color="warn" (click)="cancelOrder(order)">
-                Cancel
-            </button>
-        </mat-card-content>
+        <div class="head">Table {{order.payload.val().table}} | {{order.payload.val().dish}}</div>
+        <div class="detail" *ngIf="order.payload.val().note != '-'">Note: {{order.payload.val().note}}</div>
     </mat-card>
 </div>

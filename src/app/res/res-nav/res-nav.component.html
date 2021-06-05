@@ -6,15 +6,14 @@
     <mat-toolbar>
       <span>{{user.name}}</span>
       <span style="flex: auto;"></span>
-      <button mat-icon-button (click)="logout()">
-        <mat-icon>login</mat-icon>
+      <button mat-icon-button routerLink="/login">
+        <mat-icon>person</mat-icon>
       </button>
     </mat-toolbar>
     <mat-nav-list>
-      <a mat-list-item (click)="drawer.toggle()" routerLink="">Table List</a>
+      <a mat-list-item (click)="drawer.toggle()" routerLink="/staff">Table List</a>
       <a mat-list-item (click)="drawer.toggle()" routerLink="order-list">Order List</a>
       <a mat-list-item (click)="drawer.toggle()" routerLink="menu-list">Menu</a>
-      <a mat-list-item (click)="drawer.toggle()" routerLink="report">Report</a>
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
@@ -33,7 +32,7 @@
           menu
         </mat-icon>
       </button>
-      <span>Management System</span>
+      <span>Staff</span>
     </mat-toolbar>
 
     <router-outlet></router-outlet>

@@ -1,28 +1,25 @@
 <div class="form-container">
-    <div>
-        <mat-form-field appearance="outline">
-            <mat-label>Dish Name</mat-label>
-            <input [(ngModel)]="dishName" matInput placeholder="Placeholder">
-        </mat-form-field>
-        <mat-form-field appearance="outline">
-            <mat-label>Price</mat-label>
-            <input [(ngModel)]="price" matInput placeholder="Placeholder">
-        </mat-form-field>
-        <mat-form-field appearance="outline">
-            <mat-label>Category</mat-label>
-            <mat-select [(value)]="category">
-                <mat-option>Uncategorized</mat-option>
-                <mat-option [value]="item.id" *ngFor="let item of categories">{{item.name}}</mat-option>
-            </mat-select>
-        </mat-form-field>
-        <div class="checkbox">
-            <mat-checkbox [(ngModel)]="recommended">Recommended</mat-checkbox>
-        </div>
-        <img *ngIf="imageUrl" [src]="imageUrl" width="250">
-        <div>
-            <label for="file">Image </label>
-            <input type="file" (change)="selectFile($event)" accept=".png,.jpg" />
-        </div>
+    <mat-form-field appearance="outline">
+        <mat-label>Dish Name</mat-label>
+        <input [(ngModel)]="dishName" matInput>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+        <mat-label>Price</mat-label>
+        <input [(ngModel)]="price" matInput>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+        <mat-label>Category</mat-label>
+        <mat-select [(value)]="category">
+            <mat-option [value]="item.id" *ngFor="let item of categories">{{item.name}}</mat-option>
+        </mat-select>
+    </mat-form-field>
+    <div class="checkbox">
+        <mat-checkbox [(ngModel)]="recommended">Recommended</mat-checkbox>
+    </div>
+    <div>Image</div>
+    <img *ngIf="imageUrl" [src]="imageUrl" width="250">
+    <div style="margin: 8px 0px;">
+        <input type="file" (change)="selectFile($event)" accept=".png,.jpg" />
     </div>
     <div>
         <button mat-raised-button type="submit" (click)="saveDish()" routerLink="/admin/edit-menu">

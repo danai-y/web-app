@@ -28,3 +28,10 @@ button {
 .top-button-row {
     margin: 8px;
 }
+
+h2 {
+    padding: 8px 16px;
+    margin: 0px;
+    font-weight: 500;
+    background-color: #C2C2C2;
+}

@@ -12,7 +12,7 @@
                     <button mat-mini-fab color="primary" (click)="editStaff(staff)" routerLink="/admin/form-staff">
                         <mat-icon>create</mat-icon>
                     </button>
-                    <button mat-mini-fab color="warn" (click)="deleteStaff(staff.key)" routerLink="/admin/form-staff">
+                    <button *ngIf="staff.payload.val().role != 'admin'" mat-mini-fab color="warn" (click)="deleteStaff(staff.key)" routerLink="/admin/form-staff">
                         <mat-icon>delete</mat-icon>
                     </button>
                 </div>

@@ -13,7 +13,7 @@ import { EditMenuComponent } from './admin/edit-menu/edit-menu.component';
 import { AdminNavComponent } from './admin/admin-nav/admin-nav.component';
 import { MenuFormComponent } from './admin/form-menu/menu-form.component';
 import { BillingComponent } from './res/billing/billing.component';
-import { ReportComponent } from './res/report/report.component';
+import { ReportComponent } from './admin/report/report.component';
 import { EditCategoryComponent } from './admin/edit-category/edit-category.component';
 import { CategoryFormComponent } from './admin/form-category/category-form.component';
 import { AuthGuard } from './auth/auth.guard';
@@ -36,10 +36,11 @@ const routes: Routes = [
       { path: 'menu-form', component: MenuFormComponent },
       { path: 'category-form', component: CategoryFormComponent },
       { path: 'form-staff', component: FormStaffComponent },
+      { path: 'report', component: ReportComponent },
     ]
   },
   {
-    path: 'manage',
+    path: 'staff',
     component: ResNavComponent,
     canActivate: [AuthGuard],
     data: { roles: ['admin', 'staff'] },
@@ -48,7 +49,6 @@ const routes: Routes = [
       { path: 'order-list', component: OrderListComponent },
       { path: 'menu-list', component: MenuListComponent },
       { path: 'billing', component: BillingComponent },
-      { path: 'report', component: ReportComponent },
     ]
   },
   {

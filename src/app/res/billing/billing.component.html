@@ -31,9 +31,9 @@
     Some dishes have not been served.
 </div>
 
-<button *ngIf="allServed" class="add-margin" mat-raised-button color="primary" (click)="bill()" routerLink="/manage">
+<button *ngIf="allServed" class="add-margin" mat-raised-button color="primary" (click)="bill()" routerLink="/staff">
     Paid
 </button>
-<button class="add-margin" mat-raised-button color="warn" (click)="cancelBilling()" routerLink="/manage">
+<button class="add-margin" mat-raised-button color="warn" (click)="cancelBilling()" routerLink="/staff">
     Cancel billing
 </button>

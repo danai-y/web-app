@@ -33,6 +33,12 @@ export class EditCategoryComponent implements OnInit {
   deleteCategory() {
     var lastKey = this.categories[this.categories.length - 1].key;
     this.categoriesRef.remove(lastKey);
+    let menuRef = this.db.list("menu", ref => ref.orderByChild('category').equalTo(this.categories.length)).snapshotChanges().subscribe(items => {
+      items.forEach(item => {
+        this.db.list('menu').update(item.key!, {'category': 0, 'status': 0});
+      })
+      menuRef.unsubscribe();
+    })
   }
 
   editCategory(category: any) {

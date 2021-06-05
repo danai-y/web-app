@@ -6,19 +6,15 @@
         Delete
     </button>
 </div>
-<div *ngFor="let category of categories">
-    <mat-card>
-        <div style="display: table;">
-            <div class="name">{{category.payload.val().name}}</div>
-            <div class="button-row">
-                <div class="flex-container">
-                    <button routerLink="/admin/category-form" (click)="editCategory(category)" mat-mini-fab
-                        color="primary">
-                        <mat-icon>create</mat-icon>
-                    </button>
-                </div>
+<mat-card *ngFor="let category of categories">
+    <div style="display: table;">
+        <div class="name">{{category.payload.val().name}}</div>
+        <div class="button-row">
+            <div class="flex-container">
+                <button routerLink="/admin/category-form" (click)="editCategory(category)" mat-mini-fab color="primary">
+                    <mat-icon>create</mat-icon>
+                </button>
             </div>
         </div>
-
-    </mat-card>
-</div>
+    </div>
+</mat-card>

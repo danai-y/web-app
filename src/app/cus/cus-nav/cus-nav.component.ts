@@ -14,7 +14,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class CusNavComponent implements OnInit {
 
   tableId!: number;
-  tableId$ = new Subject<number>();
 
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
     .pipe(
@@ -28,25 +27,27 @@ export class CusNavComponent implements OnInit {
     private cusNavService: CusNavService,
     private router: Router
   ) {
-    this.tableId$.subscribe(id => {
-      this.cusNavService.noTable$.subscribe(noTable => {
-        if (id <= 0 || id > noTable) {
-          this.router.navigate(['**']);
-        }
-      });
+    this.cusNavService.activateWildCard$.subscribe(x => {
+      if (x) {
+        this.router.navigate(['**']);
+      }
+    });
+    this.cusNavService.noTable$.subscribe(noTable => {
+      if (this.tableId <= 0 || this.tableId > noTable) {
+        this.cusNavService.activateWildCard$.next(true);
+      }
     });
   }
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
       this.tableId = +params.get('tableId')!;
+      if (isNaN(this.tableId)) {
+        this.cusNavService.activateWildCard$.next(true);
+      } else {
+        this.cusNavService.setTableId(this.tableId);
+      }
     });
-    if (isNaN(this.tableId)) {
-      this.router.navigate(['**']);
-      return;
-    }
-    this.tableId$.next(this.tableId);
-    this.cusNavService.setTableId(this.tableId);
   }
 
 }

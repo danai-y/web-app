@@ -41,7 +41,7 @@ export class MenuFormComponent implements OnInit {
 
   saveDish() {
     let duplicatedName = false;
-    if (this.formService.dishSnap) {
+    if (!this.formService.dishSnap) {
       this.menuRef.valueChanges().subscribe(items => {
         items.forEach(dish => {
           if (this.dishName == dish.name) {
@@ -70,8 +70,9 @@ export class MenuFormComponent implements OnInit {
   }
 
   selectFile(event: any) {
+    let fileName = Date.now();
     const file = event.target.files[0];
-    const filePath = 'menu-image/' + this.dishKey;
+    const filePath = 'menu-image/' + fileName;
     const fileRef = this.storage.ref(filePath);
     const task = this.storage.upload(filePath, file);
     task.percentageChanges().pipe(

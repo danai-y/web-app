@@ -18,7 +18,6 @@ export class AuthGuard implements CanActivate {
     state: RouterStateSnapshot
   ): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
     console.log('AuthGuard#canActivate called');
-    this.authService.redirectUrl = state.url;
     const userData = this.authService.userData;
     if (userData) {
       if (route.data.roles && route.data.roles.indexOf(userData.role) === -1) {
